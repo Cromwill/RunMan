@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     public float jumpForce = 20f;
     public JoyStick joystick;
 
+    [SerializeField] private EventStorage _eventStorage;
+    private float _distanceCovered = 0;
+
     float angle;
     CapsuleCollider cd;
     Rigidbody rb;
@@ -25,8 +28,8 @@ public class Player : MonoBehaviour
         speed = 5F;
         rotationSpeed = 100F;
         jumpForce = 20f;
-        transform.position = new Vector3(0,5,0);
-        transform.rotation = new Quaternion(0,0,0, 0);
+        transform.position = new Vector3(0, 5, 0);
+        transform.rotation = new Quaternion(0, 0, 0, 0);
     }
 
     void Awake()
@@ -45,7 +48,10 @@ public class Player : MonoBehaviour
             {
                 transform.Rotate(new Vector3(0, joystick.RotateEulers(rotationSpeed), 0));
             }
-            transform.position += transform.forward * speed * Time.fixedDeltaTime;
+            Vector3 nextPosition = transform.forward * speed * Time.fixedDeltaTime;
+            _distanceCovered += Vector3.Distance(transform.position, nextPosition);
+            transform.position += nextPosition;
+            _eventStorage.AddAction(new MoveEvent(_distanceCovered));
             //rb.AddForce(new Vector3(0, -40, 0), ForceMode.Acceleration);
         }
     }
