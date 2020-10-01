@@ -2952,6 +2952,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 100
   _isPresentation: 1
+  _price: 150
+  _playerId: 3
+  _type: Avatar
 --- !u!1 &2829142827319932931
 GameObject:
   m_ObjectHideFlags: 0

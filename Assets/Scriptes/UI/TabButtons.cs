@@ -5,14 +5,11 @@ using UnityEngine.UI;
 
 public class TabButtons : MonoBehaviour
 {
-    private Slider _selfSlider;
+    [SerializeField] private Scrollbar _selfScrollBar;
 
     public void ShowPanel(int sliderValue)
     {
         gameObject.SetActive(true);
-
-        if (_selfSlider == null)
-            _selfSlider = GetComponent<Slider>();
-        _selfSlider.value = sliderValue;
+        _selfScrollBar.value = sliderValue;
     }
 }

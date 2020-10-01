@@ -3,6 +3,7 @@
 //класс отвечающий за действия персонажа во время игрвоого процесса
 public class Player : MonoBehaviour
 {
+    [SerializeField] private int _playerId;
     public int ControlType = 1;
     public float speed = 5F;
     public float rotationSpeed = 200F;
