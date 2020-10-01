@@ -10,7 +10,7 @@ public class Skills : MonoBehaviour
     {
         int value = 0;
 
-        foreach(var skill in _skills)
+        foreach (var skill in _skills)
         {
             value += skill.CurrentValue;
         }
@@ -19,11 +19,19 @@ public class Skills : MonoBehaviour
     }
     public void ConfirmSkills()
     {
-        SaveDataStorage.SaveSkills();
+        foreach (var skill in _skills)
+            SaveDataStorage.SaveSkills(skill.SkillType, skill.CurrentValue);
+
+        ShowTotal();
     }
 
     public void CancelScills()
     {
-        SaveDataStorage.LoadSkills();
+        foreach(var skill in _skills)
+        {
+            skill.SetValue(SaveDataStorage.LoadSkills(skill.SkillType));
+        }
+
+        ShowTotal();
     }
 }

@@ -31,14 +31,15 @@ public static class SaveDataStorage
         return PlayerPrefs.GetInt("CurrentAvatarId");
     }
 
-    public static void SaveSkills()
+    public static void SaveSkills(SkillType skillType, int value)
     {
-
+        PlayerPrefs.SetInt("SavedSkill_" + skillType.ToString(), value);
+        PlayerPrefs.Save();
     }
 
-    public static void LoadSkills()
+    public static int LoadSkills(SkillType skillType)
     {
-
+        return PlayerPrefs.GetInt("SavedSkill_" + skillType.ToString());
     }
 
     public static void SaveScore(Score score)
@@ -64,5 +65,13 @@ public class Score
         Money = money;
         Coins = coins;
     }
+}
+
+public enum SkillType
+{
+    RunningSpeed,
+    SwingSpeed,
+    RateOfFire,
+    Damage
 }
 
