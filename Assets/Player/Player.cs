@@ -4,94 +4,47 @@
 public class Player : MonoBehaviour
 {
     [SerializeField] private int _playerId;
-    public int ControlType = 1;
-    public float speed = 5F;
-    public float rotationSpeed = 200F;
-    public float jumpForce = 20f;
-    public JoyStick joystick;
+    [SerializeField] private int _controlType = 1;
+    [SerializeField] private float _speed = 5F;
+    [SerializeField] private float _rotationSpeed = 200F;
 
-    [SerializeField] private EventStorage _eventStorage;
+    private MobileInputter _joystick;
     private float _distanceCovered = 0;
 
-    float angle;
-    CapsuleCollider cd;
-    Rigidbody rb;
-    bool isAlive = true;
-    Animator animator;
-    AnimationClip clip;
+    private Rigidbody _selfRigidbody;
 
-    Touch touch;
-    Vector2 tStart, tEnd;
-    float Hm;
 
-    public void Reset()
+    private void Awake()
     {
-        speed = 5F;
-        rotationSpeed = 100F;
-        jumpForce = 20f;
-        transform.position = new Vector3(0, 5, 0);
-        transform.rotation = new Quaternion(0, 0, 0, 0);
+        _selfRigidbody = GetComponent<Rigidbody>();
     }
 
-    void Awake()
+    private void FixedUpdate()
     {
-        rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
-        cd = GetComponent<CapsuleCollider>();
+        Move();
     }
 
-    void FixedUpdate()
+    private void OnTriggerEnter(Collider col)
     {
-        if (!GameController.Paused)
-        {
 
-            if (joystick.placed)
-            {
-                transform.Rotate(new Vector3(0, joystick.RotateEulers(rotationSpeed), 0));
-            }
-            Vector3 nextPosition = transform.forward * speed * Time.fixedDeltaTime;
-            _distanceCovered += Vector3.Distance(transform.position, nextPosition);
-            transform.position += nextPosition;
-            _eventStorage.AddAction(new MoveEvent(_distanceCovered));
-            //rb.AddForce(new Vector3(0, -40, 0), ForceMode.Acceleration);
-        }
     }
 
-    void OnTriggerEnter(Collider col)
+    private void Move()
     {
-        switch (col.tag)
-        {
-            case "DeadZone":
-                if (!animator.GetBool("Jump_b"))
-                {
-                    animator.SetBool("Jump_b", true);
-                    rb.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
-                    animator.SetBool("Grounded", false);
-                    speed = 20f;
-                    //isAlive = false;
-                    cd.enabled = false;
-                    //CameraController.Active = false;
-                    //DeadZone.Active = false;
-                }
-                break;
-            case "RunArea":
-                if (isAlive)
-                {
-                    animator.SetBool("Jump_b", false);
-                    animator.SetBool("Grounded", true);
-                    cd.enabled = true;
-                    speed = 10f;
-                    CCamera.Active = true;
-                }
-                break;
-            case "Base":
-                Debug.Log(cd.enabled);
-                if (!isAlive)
-                    Destroy(gameObject);
-                //GameUIControl.LeaveGame();
-                break;
-        }
+        _selfRigidbody.velocity = transform.forward.normalized * _speed * Time.fixedDeltaTime;
     }
+
+    public void Turn(RotateDirection direction)
+    {
+        float angle = (_rotationSpeed * Time.deltaTime) * (int)direction;
+        transform.Rotate(new Vector3(0, angle, 0), Space.Self);
+    }
+}
+
+public enum RotateDirection
+{
+    Left = -1,
+    Right = 1
 }
 
 [System.Serializable]

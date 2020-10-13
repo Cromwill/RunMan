@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class GrateButtons : MonoBehaviour
@@ -19,7 +18,7 @@ public class GrateButtons : MonoBehaviour
 
     public void PlayLevel()
     {
-
+        Debug.Log("LevelPlay");
     }
 
     public void ShowGarage()
@@ -32,7 +31,7 @@ public class GrateButtons : MonoBehaviour
         _tabButtons.ShowPanel(0);
     }
 
-    public void SelectedButton(Image currentImage)
+    private void SelectedButton(Image currentImage)
     {
         currentImage.color = _selectedColor;
 
