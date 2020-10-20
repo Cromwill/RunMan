@@ -4,10 +4,17 @@ using UnityEngine;
 
 public static class SaveDataStorage
 {
-    public static void SaveCurrentRunners(IBuyableObject avatar)
+    public static void SaveBuyableObject(IBuyableObject buyable)
     {
-        PlayerPrefs.SetInt("Type_" + avatar.Type + "_Id_" + avatar.Id, avatar.Id);
-        PlayerPrefs.SetInt("CurrentAvatarId", avatar.Id);
+        if (buyable.Type == "avatar")
+        {
+            PlayerPrefs.SetInt("Type_" + buyable.Type + "_Id_" + buyable.Id, buyable.Id);
+            PlayerPrefs.SetInt("CurrentAvatarId", buyable.Id);
+        }
+        else
+        {
+            SaveItem(buyable as IItem, true);
+        }
         PlayerPrefs.Save();
     }
 
@@ -53,6 +60,23 @@ public static class SaveDataStorage
     {
         return new Score(PlayerPrefs.GetInt("Money"), PlayerPrefs.GetInt("Coins"));
     }
+
+    public static void SaveItem(IItem item, bool isItemHave)
+    {
+        PlayerPrefs.SetString("Haveable_item_" + item.GetItemName, isItemHave.ToString());
+        PlayerPrefs.Save();
+    }
+
+    public static bool ItemContain(IItem item)
+    {
+        if (PlayerPrefs.HasKey("Haveable_item_" + item.GetItemName))
+        {
+            return PlayerPrefs.GetString("Haveable_item_" + item.GetItemName) == true.ToString();
+        }
+        else
+            return false;
+    }
+
 }
 
 public class Score

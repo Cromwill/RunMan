@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GrateButtons : MonoBehaviour
@@ -18,6 +19,7 @@ public class GrateButtons : MonoBehaviour
 
     public void PlayLevel()
     {
+        SceneManager.LoadScene(1);
         Debug.Log("LevelPlay");
     }
 

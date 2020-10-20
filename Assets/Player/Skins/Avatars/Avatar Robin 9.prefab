@@ -6064,7 +6064,7 @@ MonoBehaviour:
   _isPresentation: 1
   _price: 0
   _playerId: 0
-  _type: Avatar
+  _type: avatar
 --- !u!1 &338609431264341371
 GameObject:
   m_ObjectHideFlags: 0

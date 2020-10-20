@@ -27,7 +27,7 @@ public class BuyPanel : MonoBehaviour
     {
         if (_scoreCounter.ReduceScore(new Score((int)_buyableObject.Price, 0)))
         {
-            _scoreCounter.SaveAvatar(_buyableObject);
+            _scoreCounter.SaveBuyableObject(_buyableObject);
             PurchaseСonfirmed?.Invoke();
             Cancel();
         }

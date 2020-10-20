@@ -31,7 +31,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: material_polytope_foliage
-    second: {fileID: 2100000, guid: 87d2215b0b73e85429deecaafc3c57d0, type: 2}
+    second: {fileID: 2100000, guid: b5023599e19117f4289c89369931a415, type: 2}
   materials:
     materialImportMode: 1
     materialName: 1
@@ -41,7 +41,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 0
+    optimizeGameObjects: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -109,7 +109,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 100
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

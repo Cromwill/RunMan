@@ -32,9 +32,9 @@ public class PlayerScoreCounter : MonoBehaviour
             return false;
     }
 
-    public void SaveAvatar(IBuyableObject avatar)
+    public void SaveBuyableObject(IBuyableObject buyable)
     {
-        SaveDataStorage.SaveCurrentRunners(avatar);
+        SaveDataStorage.SaveBuyableObject(buyable);
     }
 
     public void AddMoney(int value)

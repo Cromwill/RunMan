@@ -2,48 +2,36 @@
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(FogConstructor))]
 public class LevelConstructor : MonoBehaviour
 {
     [SerializeField] private int _verticalRange;
     [SerializeField] private int _horizontalRange;
-    [SerializeField] private GameObject _tilePrefabGameObject;
     [SerializeField] private MapElementPool _pool;
     [SerializeField] private GameObject _startTileGameObject;
-    
-    [Range(0, 100)]
-    [SerializeField] private float _level;
 
-    private MapTile[] _tilesOnScene;
-    private Transform _cameraTransform;
-    private BarrierGenerator _barrierGenerator;
-    private ITile _tilePrefab;
     private ITile _startTile;
     private List<ITile> _currentTiles;
+    private bool _isFinishGenerateTiles = false;
+    private FogConstructor _fogConstructor;
 
     private void OnValidate()
     {
-        _tilePrefabGameObject = _tilePrefabGameObject.GetComponent<ITile>() == null ? null : _tilePrefabGameObject;
         _startTileGameObject = _startTileGameObject.GetComponent<ITile>() == null ? null : _startTileGameObject;
-    }
-
-    private void Awake()
-    {
-        _tilePrefab = _tilePrefabGameObject != null ? _tilePrefabGameObject.GetComponent<ITile>() : null;
-        _startTile = _startTileGameObject != null ? _startTileGameObject.GetComponent<ITile>() : null;
-        _startTile.CheckPosition += GenerateLevel;
-        _currentTiles = new List<ITile>();
-        _currentTiles.Add(_startTile);
     }
 
     private void Start()
     {
-
+        _startTile = _startTileGameObject != null ? _startTileGameObject.GetComponent<ITile>() : null;
+        _startTile.CheckPosition += GenerateLevel;
+        _currentTiles = new List<ITile>();
+        _currentTiles.Add(_startTile);
+        _fogConstructor = GetComponent<FogConstructor>();
     }
 
-    private void Update()
-    {
+    public List<ITile> GetZLine(float zPosition) => _currentTiles.Where(t => t.GetPosition().z == zPosition).ToList();
 
-    }
+    public List<ITile> GetTiles() => _currentTiles;
 
     private void GenerateLevel(ITile currentTile)
     {
@@ -58,9 +46,9 @@ public class LevelConstructor : MonoBehaviour
 
         List<Vector3> requiredCoordinates = new List<Vector3>();
 
-        for(int i = _horizontalRange * -1; i <= _horizontalRange; i++)
+        for (int i = _horizontalRange * -1; i <= _horizontalRange; i++)
         {
-            for(int j = _verticalRange * -1; j <= _verticalRange; j++)
+            for (int j = _verticalRange * -1; j <= _verticalRange; j++)
             {
                 float xPosition = currentTile.GetPosition().x + i * tileXSize;
                 float zPosition = currentTile.GetPosition().z + j * tileZSize;
@@ -68,21 +56,24 @@ public class LevelConstructor : MonoBehaviour
             }
         }
 
-        foreach(var coordinate in requiredCoordinates)
+        foreach (var coordinate in requiredCoordinates)
         {
-            if(_currentTiles.Where(tile => tile.GetPosition() == coordinate).ToArray().Count() == 0)
-            {
-                var tile = GenerateTile(coordinate);
-                tile.CheckPosition += GenerateLevel;
-                _currentTiles.Add(tile);
-            }
+            if (_currentTiles.Where(tile => tile.GetPosition() == coordinate).ToArray().Count() == 0)
+                _currentTiles.Add(GenerateTile(coordinate));
+        }
+
+        if (!_isFinishGenerateTiles)
+        {
+            _isFinishGenerateTiles = true;
+            _fogConstructor.StartGenerate(this, _startTile);
         }
     }
 
     private ITile GenerateTile(Vector3 position, bool isFirstTile = false)
     {
-        ITile tile = Instantiate(_tilePrefabGameObject).GetComponent<ITile>();
+        ITile tile = _pool.GetTile();
         tile.SetPosition(position);
+        tile.CheckPosition += GenerateLevel;
         return tile;
     }
 }

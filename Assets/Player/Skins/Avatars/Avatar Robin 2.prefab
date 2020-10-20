@@ -10262,7 +10262,7 @@ MonoBehaviour:
   _isPresentation: 1
   _price: 100
   _playerId: 2
-  _type: Avatar
+  _type: avatar
 --- !u!1 &5904682823106971470
 GameObject:
   m_ObjectHideFlags: 0

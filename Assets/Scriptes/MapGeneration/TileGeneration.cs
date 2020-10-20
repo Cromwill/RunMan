@@ -11,6 +11,8 @@ public class TileGeneration : MonoBehaviour, ITile
     private Mesh _mesh;
     private MapElementPool _pool;
 
+    public bool IsInThePool { get; set; } = true;
+    public bool IsHaveFog { get; private set; }
     public event Action<ITile> CheckPosition;
 
     private void OnDrawGizmosSelected()
@@ -46,9 +48,22 @@ public class TileGeneration : MonoBehaviour, ITile
 
     public Vector3 GetSize() => _mesh.bounds.size;
 
+    public void AddFog(Fog fog)
+    {
+        IsHaveFog = true;
+        fog.Destriction += ReturnToPool;
+    }
+
+    private void ReturnToPool(Fog fog)
+    {
+        fog.Destriction -= ReturnToPool;
+        IsHaveFog = false;
+        _pool.ReturnToPool(this);
+    }
+
     private void GenerateTile(Vector3[] positions, MapElementTypes mapElementTypes)
     {
-        for(int i = 0; i < positions.Length; i++)
+        for (int i = 0; i < positions.Length; i++)
         {
             IMapElement prefab = mapElementTypes == MapElementTypes.Destroy ? _pool.GetDestroyObject() : _pool.GetNonDestroyObject();
             IMapElement mapElement = Instantiate((MapElement)prefab, transform);
@@ -61,10 +76,10 @@ public class TileGeneration : MonoBehaviour, ITile
         if (collision.gameObject.GetComponent<Player>() != null)
             CheckPosition?.Invoke(this);
     }
+}
 
-    private enum MapElementTypes
-    {
-        Destroy,
-        NotDestroy
-    }
+public enum MapElementTypes
+{
+    Destroy,
+    NotDestroy
 }

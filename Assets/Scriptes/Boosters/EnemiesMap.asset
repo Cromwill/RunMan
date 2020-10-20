@@ -15,3 +15,7 @@ MonoBehaviour:
   _boosterType: 2
   _changingValue: 0
   _price: 500
+  _descriptions: 
+  _itemName: 
+  _currencyType: 0
+  _itemViewer: {fileID: 21300000, guid: 91611722402936d4b9aa9676a5aa1fb9, type: 3}

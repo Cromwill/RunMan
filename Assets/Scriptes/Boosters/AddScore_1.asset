@@ -15,3 +15,8 @@ MonoBehaviour:
   _boosterType: 3
   _changingValue: 2
   _price: 1000
+  _descriptions: Add score
+  _itemName: Score+
+  _currencyType: 0
+  _itemViewer: {fileID: 21300000, guid: 91611722402936d4b9aa9676a5aa1fb9, type: 3}
+  _itemType: 1
