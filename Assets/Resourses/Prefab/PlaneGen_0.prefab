@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2523697430744160388}
   - component: {fileID: 1439005594}
   m_Layer: 0
-  m_Name: PlaneGen
+  m_Name: PlaneGen_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -266,10 +266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc141be6583234418f83adad372795a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _notDestroyObjectPositions:
-  - {x: 3.2, y: 0.28022242, z: 3.1420736}
-  - {x: -3.520084, y: 0, z: -3.6688623}
-  _destroyPositions:
-  - {x: 3.18, y: 0, z: 0}
-  - {x: -2.7651105, y: 0, z: 2.8383677}
-  - {x: 3.0913205, y: 0, z: -3.6910357}
+  NotDestroyObjectPositions:
+  - {x: -3.520112, y: 0, z: 0}
+  DestroyPositions:
+  - {x: -0.006955862, y: 0, z: 3.557911}
+  - {x: -0.006955862, y: 0, z: -4.0054483}
+  EnemiesSpawnDot: {x: 0, y: 0, z: 0}

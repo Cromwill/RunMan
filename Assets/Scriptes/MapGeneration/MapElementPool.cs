@@ -15,6 +15,7 @@ public class MapElementPool : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
         GeneratePool();
     }
     public IMapElement GetNonDestroyObject(Transform parent)

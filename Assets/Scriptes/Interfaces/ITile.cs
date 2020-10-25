@@ -9,6 +9,7 @@ public interface ITile
     Vector3 GetPosition();
     Vector3 GetSize();
     void AddFog(Fog fog);
+    void AddSpawner(EnemiesSpawner spawner);
 
     event Action<ITile> CheckPosition;
 }

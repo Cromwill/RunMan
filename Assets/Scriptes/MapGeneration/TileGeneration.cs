@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TileGeneration : MonoBehaviour, ITile
 {
-    public Vector3[] _notDestroyObjectPositions;
-    public Vector3[] _destroyPositions;
+    public Vector3[] NotDestroyObjectPositions;
+    public Vector3[] DestroyPositions;
+    public Vector3 EnemiesSpawnDot;
 
     private Mesh _mesh;
     private MapElementPool _pool;
+    private EnemiesSpawner _spawner;
 
     public bool IsInThePool { get; set; } = true;
     public bool IsHaveFog { get; private set; }
@@ -19,27 +19,30 @@ public class TileGeneration : MonoBehaviour, ITile
     {
         Gizmos.color = Color.grey;
 
-        if (_notDestroyObjectPositions != null)
+        if (NotDestroyObjectPositions != null)
         {
-            for (int i = 0; i < _notDestroyObjectPositions.Length; i++)
-                Gizmos.DrawCube(transform.position + _notDestroyObjectPositions[i], new Vector3(1, 1, 0.5f));
+            for (int i = 0; i < NotDestroyObjectPositions.Length; i++)
+                Gizmos.DrawCube(transform.position + NotDestroyObjectPositions[i], new Vector3(1, 1, 0.5f));
         }
 
-        if (_destroyPositions != null)
+        if (DestroyPositions != null)
         {
             Gizmos.color = Color.red;
 
-            for (int i = 0; i < _destroyPositions.Length; i++)
-                Gizmos.DrawSphere(transform.position + _destroyPositions[i], 0.35f);
+            for (int i = 0; i < DestroyPositions.Length; i++)
+                Gizmos.DrawSphere(transform.position + DestroyPositions[i], 0.35f);
         }
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(transform.position + EnemiesSpawnDot, 0.35f);
     }
 
     private void Start()
     {
         _mesh = GetComponent<MeshFilter>().mesh;
         _pool = FindObjectOfType<MapElementPool>();
-        GenerateTile(_notDestroyObjectPositions, MapElementTypes.NotDestroy);
-        GenerateTile(_destroyPositions, MapElementTypes.Destroy);
+        GenerateTile(NotDestroyObjectPositions, MapElementTypes.NotDestroy);
+        GenerateTile(DestroyPositions, MapElementTypes.Destroy);
     }
 
     public void SetPosition(Vector3 position) => transform.position = position;
@@ -54,10 +57,18 @@ public class TileGeneration : MonoBehaviour, ITile
         fog.Destriction += ReturnToPool;
     }
 
+    public void AddSpawner(EnemiesSpawner spawner)
+    {
+        _spawner = spawner;
+    }
+
     private void ReturnToPool(Fog fog)
     {
         fog.Destriction -= ReturnToPool;
         IsHaveFog = false;
+
+        if (_spawner != null)
+            Destroy(_spawner.gameObject);
         _pool.ReturnToPool(this);
     }
 

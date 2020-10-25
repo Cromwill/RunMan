@@ -12,15 +12,16 @@ public class TileGenerationEditor : Editor
 
         EditorGUI.BeginChangeCheck();
 
+        t.EnemiesSpawnDot = Handles.PositionHandle(t.transform.position + t.EnemiesSpawnDot, Quaternion.identity) - t.transform.position;
 
-        for(int i = 0; i < t._notDestroyObjectPositions.Length; i++)
+        for (int i = 0; i < t.NotDestroyObjectPositions.Length; i++)
         {
-            t._notDestroyObjectPositions[i] = Handles.PositionHandle(t.transform.position + t._notDestroyObjectPositions[i], Quaternion.identity) - t.transform.position;
+            t.NotDestroyObjectPositions[i] = Handles.PositionHandle(t.transform.position + t.NotDestroyObjectPositions[i], Quaternion.identity) - t.transform.position;
         }
 
-        for (int i = 0; i < t._destroyPositions.Length; i++)
+        for (int i = 0; i < t.DestroyPositions.Length; i++)
         {
-            t._destroyPositions[i] = Handles.PositionHandle(t.transform.position + t._destroyPositions[i], Quaternion.identity) - t.transform.position;
+            t.DestroyPositions[i] = Handles.PositionHandle(t.transform.position + t.DestroyPositions[i], Quaternion.identity) - t.transform.position;
         }
 
         if (EditorGUI.EndChangeCheck())

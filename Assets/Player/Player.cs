@@ -1,43 +1,51 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 //класс отвечающий за действия персонажа во время игрвоого процесса
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDeadable
 {
     [SerializeField] private int _playerId;
-    [SerializeField] private int _controlType = 1;
-    [SerializeField] private float _speed = 5F;
-    [SerializeField] private float _rotationSpeed = 200F;
+    [SerializeField] private int _controlType;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _rotationSpeed;
+    [SerializeField] private ScoreVieweronlevel _scoreViewer;
 
+    private ScoreCounter _scoreCounter;
     private MobileInputter _joystick;
-    private float _distanceCovered = 0;
-
     private Rigidbody _selfRigidbody;
 
+    public event Action Deading;
+
+    public ScoreCounter scoreCounter => _scoreCounter;
 
     private void Awake()
     {
         _selfRigidbody = GetComponent<Rigidbody>();
+        _scoreCounter = GetComponent<ScoreCounter>();
+        _scoreCounter.Initialization(_scoreViewer);
     }
 
     private void FixedUpdate()
     {
         Move();
-    }
-
-    private void OnTriggerEnter(Collider col)
-    {
-
-    }
-
-    private void Move()
-    {
-        _selfRigidbody.velocity = transform.forward.normalized * _speed * Time.fixedDeltaTime;
+        _scoreCounter.DistanceColculate();
     }
 
     public void Turn(RotateDirection direction)
     {
         float angle = (_rotationSpeed * Time.deltaTime) * (int)direction;
         transform.Rotate(new Vector3(0, angle, 0), Space.Self);
+    }
+
+    public void Dead()
+    {
+        Debug.Log("PlayerDead");
+        Deading?.Invoke();
+    }
+
+    private void Move()
+    {
+        _selfRigidbody.velocity = transform.forward.normalized * _speed * Time.fixedDeltaTime;
     }
 }
 

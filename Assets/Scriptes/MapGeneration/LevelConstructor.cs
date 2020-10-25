@@ -9,11 +9,13 @@ public class LevelConstructor : MonoBehaviour
     [SerializeField] private int _horizontalRange;
     [SerializeField] private MapElementPool _pool;
     [SerializeField] private GameObject _startTileGameObject;
+    [SerializeField] private NavMeshRebaker _rebaker;
 
     private ITile _startTile;
     private List<ITile> _currentTiles;
     private bool _isFinishGenerateTiles = false;
     private FogConstructor _fogConstructor;
+    private EnemiesConstructor _enemiesConstructor;
 
     private void OnValidate()
     {
@@ -27,6 +29,7 @@ public class LevelConstructor : MonoBehaviour
         _currentTiles = new List<ITile>();
         _currentTiles.Add(_startTile);
         _fogConstructor = GetComponent<FogConstructor>();
+        _enemiesConstructor = GetComponent<EnemiesConstructor>();
     }
 
     public List<ITile> GetZLine(float zPosition) => _currentTiles.Where(t => t.GetPosition().z == zPosition).ToList();
@@ -67,6 +70,8 @@ public class LevelConstructor : MonoBehaviour
             _isFinishGenerateTiles = true;
             _fogConstructor.StartGenerate(this, _startTile);
         }
+
+        _enemiesConstructor.GenerateEnemeSpawners(_currentTiles.ToArray(), currentTile);
     }
 
     private ITile GenerateTile(Vector3 position, bool isFirstTile = false)

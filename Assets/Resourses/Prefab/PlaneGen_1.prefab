@@ -266,9 +266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc141be6583234418f83adad372795a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _notDestroyObjectPositions:
-  - {x: 0, y: 0, z: 0}
-  _destroyPositions:
-  - {x: -2.0722923, y: 0, z: -3.6030483}
-  - {x: -4.087778, y: 0, z: 0.056806803}
-  - {x: 3.091319, y: 0, z: 3.7183862}
+  NotDestroyObjectPositions:
+  - {x: -4.0795393, y: 0, z: 3.625042}
+  DestroyPositions:
+  - {x: -0.29785633, y: 0, z: -2.4614487}
+  - {x: -3.5648718, y: 0, z: 0}
+  EnemiesSpawnDot: {x: 0, y: 0, z: 0}
