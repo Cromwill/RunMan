@@ -2084,6 +2084,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 125
+  _deadEffect: {fileID: 4029307394000726617, guid: 43b758984af4dda47a41a8b5e203ba95,
+    type: 3}
 --- !u!136 &5667338615085347083
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2112,7 +2114,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!1 &7727318087065605386
 GameObject:

@@ -20,7 +20,7 @@ public class EnemiesSpawner : MonoBehaviour
         while (_enemyCounter < _maxEnemiesCount)
         {
             float randomPosition = Random.Range(-1.5f, 1.51f);
-            Vector3 spawnPoint = new Vector3(randomPosition, 0.5f, randomPosition);
+            Vector3 spawnPoint = new Vector3(randomPosition, 0, randomPosition);
 
             _enemies.Add(Instantiate(_enemy, transform.position + spawnPoint, Quaternion.identity));
             _enemyCounter++;
