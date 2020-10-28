@@ -37,7 +37,6 @@ public class Enemy : MonoBehaviour, IDeadable
 
     public void Dead()
     {
-        Debug.Log("Enemy dead");
         EffectCicle effectCicle = Instantiate(_deadEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
 

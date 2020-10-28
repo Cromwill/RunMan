@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2523697430744160395}
   - component: {fileID: 2523697430744160388}
   - component: {fileID: 1439005594}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlaneGen_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,8 +238,10 @@ MonoBehaviour:
   assetGuid: 
   m_IsSelectable: 1
   m_SelectedFaces: 
-  m_SelectedEdges: []
-  m_SelectedVertices: 
+  m_SelectedEdges:
+  - a: 0
+    b: 0
+  m_SelectedVertices: 0000000000000000
 --- !u!64 &2523697430744160388
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -252,7 +254,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 30
+  m_CookingOptions: 2
   m_Mesh: {fileID: 0}
 --- !u!114 &1439005594
 MonoBehaviour:
@@ -267,8 +269,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NotDestroyObjectPositions:
-  - {x: -3.520112, y: 0, z: 0}
+  - {x: 3.5492282, y: 0, z: 3.5767126}
+  - {x: -3.7600622, y: 0, z: 3.6320848}
   DestroyPositions:
-  - {x: -0.006955862, y: 0, z: 3.557911}
-  - {x: -0.006955862, y: 0, z: -4.0054483}
+  - {x: 3.6169066, y: 0, z: -3.3613691}
+  - {x: 1, y: 0, z: -4.0054483}
   EnemiesSpawnDot: {x: 0, y: 0, z: 0}

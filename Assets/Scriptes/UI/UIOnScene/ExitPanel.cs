@@ -27,7 +27,7 @@ public class ExitPanel : MonoBehaviour
 
     public void ShowDatas(float score, float distance)
     {
-        _scoreValue.text = score.ToString("0.0#");
+        _scoreValue.text = score.ToString("0.#");
         _distanceValue.text = distance.ToString("0.0#");
     }
 

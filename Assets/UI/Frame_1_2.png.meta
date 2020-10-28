@@ -4,31 +4,31 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -5287645599574858566
-    second: Frame_1_2_0
+    second: LittleDangeonZone
   - first:
       213: -8239795609516088010
-    second: Frame_1_2_1
+    second: Map
   - first:
       213: 5216906470872816780
-    second: Frame_1_2_2
+    second: Luck
   - first:
       213: 7006513203146296074
-    second: Frame_1_2_3
+    second: AddScore_1
   - first:
       213: 5615181912189786657
     second: Frame_1_2_4
   - first:
       213: 4233259282074515840
-    second: Frame_1_2_5
+    second: AddScore_2
   - first:
       213: -1690121148327369463
-    second: Frame_1_2_6
+    second: Damage
   - first:
       213: -4958055749514713451
-    second: Frame_1_2_7
+    second: Bullets
   - first:
       213: 6212556252431514099
-    second: Frame_1_2_8
+    second: Life
   - first:
       213: 3777538947595967189
     second: Frame_1_2_9
@@ -153,7 +153,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Frame_1_2_0
+      name: LittleDangeonZone
       rect:
         serializedVersion: 2
         x: 256
@@ -161,7 +161,7 @@ TextureImporter:
         width: 1049
         height: 669
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -174,7 +174,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Frame_1_2_1
+      name: Map
       rect:
         serializedVersion: 2
         x: 1569
@@ -182,7 +182,7 @@ TextureImporter:
         width: 997
         height: 659
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -195,7 +195,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Frame_1_2_2
+      name: Luck
       rect:
         serializedVersion: 2
         x: 396
@@ -203,7 +203,7 @@ TextureImporter:
         width: 846
         height: 1024
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -216,7 +216,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Frame_1_2_3
+      name: AddScore_1
       rect:
         serializedVersion: 2
         x: 1782
@@ -224,7 +224,7 @@ TextureImporter:
         width: 703
         height: 832
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -245,7 +245,7 @@ TextureImporter:
         width: 1293
         height: 969
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -258,7 +258,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Frame_1_2_5
+      name: AddScore_2
       rect:
         serializedVersion: 2
         x: 1782
@@ -266,7 +266,7 @@ TextureImporter:
         width: 703
         height: 831
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -279,15 +279,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Frame_1_2_6
+      name: Damage
       rect:
         serializedVersion: 2
         x: 246
-        y: 0
-        width: 1294
-        height: 1702
+        y: 691
+        width: 1293
+        height: 1011
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -300,7 +300,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Frame_1_2_7
+      name: Bullets
       rect:
         serializedVersion: 2
         x: 1585
@@ -308,7 +308,7 @@ TextureImporter:
         width: 1528
         height: 820
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -321,15 +321,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Frame_1_2_8
+      name: Life
       rect:
         serializedVersion: 2
         x: 1699
         y: 0
-        width: 471
+        width: 772
         height: 967
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -337,27 +337,6 @@ TextureImporter:
       bones: []
       spriteID: 3f9ff4dfefe673650800000000000000
       internalID: 6212556252431514099
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Frame_1_2_9
-      rect:
-        serializedVersion: 2
-        x: 2173
-        y: 0
-        width: 302
-        height: 314
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5da19a898a38c6430800000000000000
-      internalID: 3777538947595967189
       vertices: []
       indices: 
       edges: []

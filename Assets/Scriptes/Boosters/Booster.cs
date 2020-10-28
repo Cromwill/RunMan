@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "new Booster", menuName = "Booster SO")]
 public class Booster : ScriptableObject, IItem, IBuyableObject

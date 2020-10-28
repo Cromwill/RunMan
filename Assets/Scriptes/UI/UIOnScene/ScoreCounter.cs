@@ -6,7 +6,7 @@ public class ScoreCounter : MonoBehaviour
     private Vector3 _oldPosition;
     private ScoreVieweronlevel _scoreViewer;
 
-    public int score { get; private set; }
+    public int score => _scoreTerms.DistanceToScore(distance);
     public float distance { get; private set; }
 
     public void Initialization(ScoreVieweronlevel scoreViewer)
@@ -23,7 +23,7 @@ public class ScoreCounter : MonoBehaviour
 
         _scoreViewer.ShowDistance(distance);
 
-        AddScore(_scoreTerms.DistanceToScore(distance));
+        AddScore(score);
     }
 
     public void AddScore(int value)

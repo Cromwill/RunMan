@@ -13761,7 +13761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1808184603800078, guid: 7beb85ea68f6adf4d91eae39663ed125, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4304045978260336, guid: 7beb85ea68f6adf4d91eae39663ed125, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13837,6 +13837,10 @@ PrefabInstance:
     - target: {fileID: 1491317940165468, guid: 566d96333dd309445943b52901918262, type: 3}
       propertyPath: m_Name
       value: Deagle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491317940165468, guid: 566d96333dd309445943b52901918262, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4911232392324380, guid: 566d96333dd309445943b52901918262, type: 3}
       propertyPath: m_LocalPosition.x

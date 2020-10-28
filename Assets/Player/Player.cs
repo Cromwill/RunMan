@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-//класс отвечающий за действия персонажа во время игрвоого процесса
+
 public class Player : MonoBehaviour, IDeadable
 {
     [SerializeField] private int _playerId;
@@ -10,25 +10,23 @@ public class Player : MonoBehaviour, IDeadable
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private ScoreVieweronlevel _scoreViewer;
 
-    private ScoreCounter _scoreCounter;
-    private MobileInputter _joystick;
     private Rigidbody _selfRigidbody;
 
     public event Action Deading;
 
-    public ScoreCounter scoreCounter => _scoreCounter;
+    public ScoreCounter scoreCounter { get; private set; }
 
     private void Awake()
     {
         _selfRigidbody = GetComponent<Rigidbody>();
-        _scoreCounter = GetComponent<ScoreCounter>();
-        _scoreCounter.Initialization(_scoreViewer);
+        scoreCounter = GetComponent<ScoreCounter>();
+        scoreCounter.Initialization(_scoreViewer);
     }
 
     private void FixedUpdate()
     {
         Move();
-        _scoreCounter.DistanceColculate();
+        scoreCounter.DistanceColculate();
     }
 
     public void Turn(RotateDirection direction)
@@ -39,7 +37,6 @@ public class Player : MonoBehaviour, IDeadable
 
     public void Dead()
     {
-        Debug.Log("PlayerDead");
         Deading?.Invoke();
     }
 
@@ -53,17 +50,4 @@ public enum RotateDirection
 {
     Left = -1,
     Right = 1
-}
-
-[System.Serializable]
-public class PlayerData
-{
-    int highScore;
-    int bestDistance;
-
-    public PlayerData(int hs, int bd)
-    {
-        highScore = hs;
-        bestDistance = bd;
-    }
 }

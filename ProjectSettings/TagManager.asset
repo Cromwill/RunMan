@@ -19,8 +19,8 @@ TagManager:
   - 
   - PostProcessing
   - Runners
-  - 
-  - 
+  - CollisionOnlyPlayer
+  - Enemy
   - 
   - 
   - 

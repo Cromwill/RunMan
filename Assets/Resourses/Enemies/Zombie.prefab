@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2118012655258397244}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Hand_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1492359605048693984}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4140173483619956540}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shoulder_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 17015125548628119}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: UpperLeg_l.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1448444201248134819}
   - component: {fileID: 2668505456791700279}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_Calf_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3603109632283652181}
   - component: {fileID: 2636434684494708123}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_Spine_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +351,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2693640586182765669}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Head.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5157184040971557985}
   - component: {fileID: 4872783616238257567}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_UpperArm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -491,7 +491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6338478834757215791}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Foot_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,7 +522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7157432077309793724}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Toe_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +552,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 280651238246725101}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: UpperArm_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2112216775244826155}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Foot_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2746414535183622696}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: UpperLeg_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +646,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6414233597878379962}
   - component: {fileID: 8603536468345583003}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_Thigh_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,7 +755,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883504410543107319}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -789,7 +789,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5779264897464308903}
   - component: {fileID: 5391131079944624185}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_Spine1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -899,7 +899,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5489150519001164211}
   - component: {fileID: 2798427414885873181}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_Calf_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1009,7 +1009,7 @@ GameObject:
   m_Component:
   - component: {fileID: 84305305209946560}
   - component: {fileID: 2481047937426920226}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_Spine_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1118,7 +1118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5324797684710395264}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1155,7 +1155,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 740875843141440804}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LowerLeg_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1186,7 +1186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 743200247765006376}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Toe_r.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1217,7 +1217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4571629549767449632}
   - component: {fileID: 6790881934894791956}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_Thigh_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1326,7 +1326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1611079065559564970}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Toe_l.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1356,7 +1356,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3610622409087062386}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LowerArm_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1388,7 +1388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2419468978489610762}
   - component: {fileID: 3668070269179843223}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_LowerArm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1498,7 +1498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5269229837122643038}
   - component: {fileID: 4496641464544840076}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_LowerArm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1607,7 +1607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169519771090398579}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: UpperLeg_r.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1637,7 +1637,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7756075659682448236}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1668,7 +1668,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7779327115987312917}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LowerLeg_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1699,7 +1699,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8969590092888525828}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: UpperArm_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1731,7 +1731,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5048180220375384043}
   - component: {fileID: 1172035060231548483}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_Spine1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1840,7 +1840,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1137446398364578979}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LowerLeg_l.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1870,7 +1870,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4122397212703161813}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Toe_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1901,7 +1901,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8274732431627234429}
   - component: {fileID: 7140938567108619536}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_Hand_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2014,7 +2014,7 @@ GameObject:
   - component: {fileID: 3868327032782388099}
   - component: {fileID: 5667338615085347083}
   - component: {fileID: 2764401065531399261}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2125,7 +2125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4900192709119460359}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2156,7 +2156,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3362713123011480974}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Hand_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2186,7 +2186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8182831488772256841}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LowerArm_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2218,7 +2218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6339674019065563353}
   - component: {fileID: 56830190224177483}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_UpperArm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2328,7 +2328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6780883178974155591}
   - component: {fileID: 2997008231402491971}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_Hand_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2437,7 +2437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5088212357578133463}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: UpperLeg_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2468,7 +2468,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2170083223989106923}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shoulder_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2500,7 +2500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3098005661429889844}
   - component: {fileID: 5843030430917642607}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_Pelves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2610,7 +2610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5792088661820193374}
   - component: {fileID: 4072764499733745417}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Zombie_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2719,7 +2719,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9162855689634493361}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2752,7 +2752,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 465841353550145813}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LowerLeg_r.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
