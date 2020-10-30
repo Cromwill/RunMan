@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
@@ -11,13 +9,11 @@ public class ArmorInfo : MonoBehaviour
     private Animator _selfAnimator;
     private int _currentBulletCount;
 
-    private void Start()
-    {
-        _selfAnimator = GetComponent<Animator>();
-    }
-
     public void Show(int count)
     {
+        if(_selfAnimator == null)
+            _selfAnimator = GetComponent<Animator>();
+
         _selfAnimator.Play("AmmunationFire");
         _currentBulletCount = count;
     }
