@@ -1732,6 +1732,8 @@ MonoBehaviour:
   _exit: {fileID: 2114748023}
   _replay: {fileID: 69628199}
   _back: {fileID: 1551770247}
+  _addMoneyViewer: {fileID: 0}
+  _someObjectsForchangeActivation: []
 --- !u!1 &1199498810
 GameObject:
   m_ObjectHideFlags: 0

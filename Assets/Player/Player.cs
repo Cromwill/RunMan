@@ -6,11 +6,14 @@ public class Player : MonoBehaviour, IDeadable
 {
     [SerializeField] private int _playerId;
     [SerializeField] private int _controlType;
-    [SerializeField] private float _speed;
+    [SerializeField] private float _accelerationTime;
+    [SerializeField] private float _minSpeed;
+    [SerializeField] private float _maxSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private ScoreVieweronlevel _scoreViewer;
 
     private Rigidbody _selfRigidbody;
+    private float _speed;
 
     public event Action Deading;
 
@@ -21,6 +24,7 @@ public class Player : MonoBehaviour, IDeadable
         _selfRigidbody = GetComponent<Rigidbody>();
         scoreCounter = GetComponent<ScoreCounter>();
         scoreCounter.Initialization(_scoreViewer);
+        _speed = (_maxSpeed + _minSpeed) / 2;
     }
 
     private void FixedUpdate()
@@ -31,6 +35,7 @@ public class Player : MonoBehaviour, IDeadable
 
     public void Turn(RotateDirection direction)
     {
+        _speed = (_maxSpeed + _minSpeed) / 2;
         float angle = (_rotationSpeed * Time.deltaTime) * (int)direction;
         transform.Rotate(new Vector3(0, angle, 0), Space.Self);
     }
@@ -42,7 +47,19 @@ public class Player : MonoBehaviour, IDeadable
 
     private void Move()
     {
+        if(_speed < _maxSpeed)
+        {
+            _speed += (_maxSpeed - _minSpeed) / _accelerationTime * Time.fixedDeltaTime;
+            if (_speed >= _maxSpeed) _speed = _maxSpeed;
+        }
+
         _selfRigidbody.velocity = transform.forward.normalized * _speed * Time.fixedDeltaTime;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<MapElement>() != null)
+            _speed = _minSpeed;
     }
 }
 
