@@ -10,7 +10,4 @@ public class AddMoneyViewer : MonoBehaviour
     {
         _moneyViewer = GetComponent<Text>();
     }
-
-
-
 }

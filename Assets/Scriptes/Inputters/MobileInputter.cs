@@ -15,6 +15,7 @@ public class MobileInputter : MonoBehaviour, IInputter
 
     private void PlayerTurn(Vector3 ScreenToViewportPoint)
     {
+        Debug.Log("Click");
         RotateDirection direction = ScreenToViewportPoint.x < 0.5f ? RotateDirection.Left : RotateDirection.Right;
         _player.Turn(direction);
     }

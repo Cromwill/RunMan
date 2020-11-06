@@ -42,8 +42,8 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 15
+  m_Color: {r: 0.990566, g: 0.34109113, b: 0.34109113, a: 1}
+  m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 65
   m_InnerSpotAngle: 1
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxEnemiesCount: 10
   _enemy: {fileID: 3868327032782388099, guid: 65b1cdd79837640448bd8b9b88eed78b, type: 3}
-  _spawnTime: 5
+  _spawnTime: 3.5
 --- !u!1 &5709601181040366040
 GameObject:
   m_ObjectHideFlags: 0

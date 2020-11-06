@@ -10,6 +10,7 @@ public class FogConstructor : MonoBehaviour
     [SerializeField] private Fog _prefab;
     [SerializeField] private float _fogRegenirationTime;
     [SerializeField] private float _fogLifeTime;
+    [SerializeField] private float _lifeTime;
 
     private LevelConstructor _levelConstructor;
     private float _fogZPosition;
@@ -43,7 +44,7 @@ public class FogConstructor : MonoBehaviour
         foreach (var tile in tiles)
         {
             var fog = Instantiate(_prefab);
-            fog.Initialization(tile, _fogLifeTime, _fogRegenirationTime);
+            fog.Initialization(tile, _fogLifeTime, _fogRegenirationTime + _lifeTime);
             tile.AddFog(fog);
         }
     }

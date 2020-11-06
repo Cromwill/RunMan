@@ -1,29 +1,33 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 //общий класс монстров для огра и зомби
 public class Enemy : MonoBehaviour, IDeadable
 {
     [SerializeField] private int _speed;
     [SerializeField] private EffectCicle _deadEffect;
+    [SerializeField] private float _maxTurnSpeed;
+    [SerializeField] private float _minTurnSpeed;
+    [SerializeField] 
 
-    private Transform player;
+    private Transform _player;
     private Rigidbody _selfRigidbody;
     private Animator _selfAnimator;
 
     private Collider _selfColider;
+    private float _turnSpeed;
 
     void Start()
     {
-        player = FindObjectOfType<Player>().transform;
+        _player = FindObjectOfType<Player>().transform;
         _selfRigidbody = GetComponent<Rigidbody>();
         _selfColider = GetComponent<CapsuleCollider>();
+        _turnSpeed = Random.Range(_minTurnSpeed, _maxTurnSpeed);
     }
 
-
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        Vector3 pDir = Vector3.Normalize(player.position - transform.position);
-        transform.LookAt(player.transform);
+        Turn();
         _selfRigidbody.velocity = transform.forward.normalized * _speed * Time.fixedDeltaTime;
     }
 
@@ -41,4 +45,15 @@ public class Enemy : MonoBehaviour, IDeadable
         Destroy(gameObject);
 
     }
+
+    private void Turn()
+    {
+        Vector3 direction = _player.transform.position - transform.position;
+        float step = _turnSpeed * Time.fixedDeltaTime;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction.normalized, step, 0.0f);
+        Debug.DrawRay(transform.position, newDirection, Color.red, 2.0f);
+
+        transform.rotation = Quaternion.LookRotation(newDirection);
+    }
+
 }
