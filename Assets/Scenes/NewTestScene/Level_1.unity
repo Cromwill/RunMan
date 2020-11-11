@@ -1865,7 +1865,6 @@ MonoBehaviour:
   _someObjectsForchangeActivation:
   - {fileID: 891850744}
   - {fileID: 141835389}
-  _delayTime: 0.01
 --- !u!1 &1199498810
 GameObject:
   m_ObjectHideFlags: 0
