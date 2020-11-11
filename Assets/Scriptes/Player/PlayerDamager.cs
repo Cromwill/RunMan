@@ -5,6 +5,7 @@ public class PlayerDamager : MonoBehaviour
 {
     [SerializeField] private int _bulletCount;
     [SerializeField] private ArmorInfo _armorViewer;
+    [SerializeField] private float _shootSpeed;
 
     private PlayerDamageZone _damageZone;
 

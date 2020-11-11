@@ -7,6 +7,8 @@ public class ScoreTerms : ScriptableObject
     [SerializeField] private float[] _distance;
     [SerializeField] private int[] _score;
 
+    [SerializeField] private float _scoreToMoneyRate;
+
     public int DistanceToScore(float distance)
     {
         int score = 0;
@@ -18,6 +20,8 @@ public class ScoreTerms : ScriptableObject
 
         return score;
     }
+
+    public int ScoreToMoney(int score) => score / (int)_scoreToMoneyRate;
 }
 
 

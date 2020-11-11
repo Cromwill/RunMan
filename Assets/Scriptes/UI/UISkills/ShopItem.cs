@@ -18,12 +18,7 @@ public class ShopItem : MonoBehaviour
         if (_buyButton == null)
             _buyButton = GetComponentInChildren<Button>();
 
-        _buyButton.onClick.AddListener(OnItemChosen);
+        _buyButton.onClick.AddListener(delegate { ItemChosen?.Invoke(_booster); });
         _priceViewer.text = _booster.GetItemPrice.ToString("0.##") + " $";
-    }
-
-    private void OnItemChosen()
-    {
-        ItemChosen?.Invoke(_booster);
     }
 }

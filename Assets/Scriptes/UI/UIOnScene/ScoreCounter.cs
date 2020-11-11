@@ -9,6 +9,8 @@ public class ScoreCounter : MonoBehaviour
     public int score => _scoreTerms.DistanceToScore(distance);
     public float distance { get; private set; }
 
+    public int money => _scoreTerms.ScoreToMoney(score);
+
     public void Initialization(ScoreVieweronlevel scoreViewer)
     {
         _oldPosition = PositionColculation(transform.position);

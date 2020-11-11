@@ -18,4 +18,6 @@ MonoBehaviour:
   _descriptions: 
   _itemName: 
   _currencyType: 0
-  _itemViewer: {fileID: 21300000, guid: 91611722402936d4b9aa9676a5aa1fb9, type: 3}
+  _itemViewer: {fileID: 5216906470872816780, guid: 8b3db9137ca05a545b41063f359e418e,
+    type: 3}
+  _itemType: 0

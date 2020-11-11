@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 
@@ -18,6 +17,7 @@ public class Player : MonoBehaviour, IDeadable
     private Rigidbody _selfRigidbody;
     private float _speed;
     private float _rotationSpeed;
+    private bool _isDead;
 
     public event Action Deading;
 
@@ -34,24 +34,27 @@ public class Player : MonoBehaviour, IDeadable
 
     private void FixedUpdate()
     {
-        Move();
-        scoreCounter.DistanceColculate();
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (!_isDead)
         {
-            _selfRigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+            Move();
+            scoreCounter.DistanceColculate();
         }
     }
 
     public void Turn(RotateDirection direction)
     {
-        //_speed = (_maxSpeed + _minSpeed) / 2;
         float angle = (_rotationSpeed * Time.deltaTime) * (int)direction;
         transform.Rotate(new Vector3(0, angle, 0), Space.Self);
     }
 
     public void Dead()
     {
-        Deading?.Invoke();
+        if (!_isDead)
+        {
+            _speed = 0;
+            Deading?.Invoke();
+            _isDead = true;
+        }
     }
 
     private void Move()
@@ -87,11 +90,6 @@ public class Player : MonoBehaviour, IDeadable
         {
             _rotationSpeed = _currentRotationSpeed;
         }
-    }
-
-    private IEnumerator ReturnTurnSpeed()
-    {
-        yield return null;
     }
 }
 

@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SkillPoints : MonoBehaviour
 {
-    [SerializeField] private ScriptableObject SkillData;
+    [SerializeField] private SkillData _skillData;
     [SerializeField] private Slider _slider;
     [SerializeField] private SkillType _skillType;
 
@@ -21,11 +19,14 @@ public class SkillPoints : MonoBehaviour
             _skills = GetComponentInParent<Skills>();
 
         SetValue(SaveDataStorage.LoadSkills(_skillType));
+
+        Score score1 = new Score(30, 10);
+        Score score2 = new Score(20, 20);
     }
 
     public void ValueChange(float value)
     {
-        CurrentValue = (int)_slider.value;
+        CurrentValue =  _skillData.GetPrice((int)_slider.value);
         _skills.ShowTotal();
     }
 

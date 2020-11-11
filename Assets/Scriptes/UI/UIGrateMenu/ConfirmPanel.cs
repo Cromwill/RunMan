@@ -21,6 +21,9 @@ public class ConfirmPanel : MonoBehaviour
     public void ShowPanel(IItem item)
     {
         gameObject.SetActive(true);
+        if (_selfAnimator == null)
+            _selfAnimator = GetComponent<Animator>();
+
 
         _itemViewer.sprite = item.GetItemViewer;
         _itemName.text = item.GetItemName;
@@ -37,17 +40,24 @@ public class ConfirmPanel : MonoBehaviour
 
     public void ProofOfPurchase()
     {
+        Booster booster = _currentItem as Booster;
+        Score price = GetItemScore(_currentItem);
 
-        if (_scoreCounter.ReduceScore(GetItemScore(_currentItem)))
+        if (booster != null && booster.Type == BoosterType.Coin)
+        {
+            if(_scoreCounter.ReduceScore(price))
+            {
+                _scoreCounter.AddCoins((int)booster.Value);
+                _selfAnimator.Play("Success");
+            }
+        }
+        else if (_scoreCounter.ReduceScore(GetItemScore(_currentItem)))
         {
             _scoreCounter.SaveBuyableObject(_currentItem as IBuyableObject); // не забыть поправить
             _confirmButton.GetComponent<Image>().sprite = _buyButtonImage[1];
-            if (_selfAnimator == null)
-                _selfAnimator = GetComponent<Animator>();
             _selfAnimator.Play("Success");
             SetConfirmButtonInteractable();
         }
-
     }
 
     private Score GetItemScore(IItem item)

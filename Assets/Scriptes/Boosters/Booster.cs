@@ -31,5 +31,6 @@ public enum BoosterType
     Speed,
     Damage,
     Item,
-    Score
+    Score,
+    Coin
 }

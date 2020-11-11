@@ -13,7 +13,6 @@ public class EndGameObserver : MonoBehaviour
 
     private void GameOver()
     {
-        _exitPanel.OpenPanel(true);
-        _exitPanel.ShowDatas(_player.scoreCounter.score, _player.scoreCounter.distance);
+        _exitPanel.ShowPanel(true, _player.scoreCounter.score, _player.scoreCounter.distance, _player.scoreCounter.money);
     }
 }

@@ -4,28 +4,21 @@ public class PlayerScoreCounter : MonoBehaviour
 {
     [SerializeField] private PlayerScoreViewer _scoreViewer;
 
-    private int _money;
-    private int _coins;
+    private Score _currentScore;
 
     private void Awake()
     {
-        var score = SaveDataStorage.LoadScore();
-        _money = score.Money;
-        _coins = score.Coins;
-
-        _scoreViewer.ShowScore(score);
+        _currentScore = SaveDataStorage.LoadScore();
+        _scoreViewer.ShowScore(_currentScore);
     }
 
     public bool ReduceScore(Score score)
     {
-        if (score.Money <= _money && score.Coins <= _coins)
+        if (score <= _currentScore)
         {
-            _money -= score.Money;
-            _coins -= score.Coins;
-
-            Score changedScore = new Score(_money, _coins);
-            SaveDataStorage.SaveScore(changedScore);
-            _scoreViewer.ShowScore(changedScore);
+            _currentScore -= score;
+            SaveDataStorage.SaveScore(_currentScore);
+            _scoreViewer.ShowScore(_currentScore);
             return true;
         }
         else
@@ -37,9 +30,17 @@ public class PlayerScoreCounter : MonoBehaviour
         SaveDataStorage.SaveBuyableObject(buyable);
     }
 
+    public bool IsCanBuy(Score price) => _currentScore >= price;
+
     public void AddMoney(int value)
     {
-        _money += value;
+        _currentScore += new Score(value, 0);
+        ReduceScore(new Score(0, 0));
+    }
+
+    public void AddCoins(int value)
+    {
+        _currentScore += new Score(0, value);
         ReduceScore(new Score(0, 0));
     }
 

@@ -5,24 +5,21 @@ public class Skills : MonoBehaviour
 {
     [SerializeField] private Text _totalText;
     [SerializeField] private SkillPoints[] _skills;
+    [SerializeField] private PlayerScoreCounter _scoreCounter;
 
     public void ShowTotal()
     {
-        int value = 0;
-
-        foreach (var skill in _skills)
-        {
-            value += skill.CurrentValue;
-        }
-
-        _totalText.text = value.ToString("0.##");
+        _totalText.text = GetTotalValue().ToString("0.##");
     }
     public void ConfirmSkills()
     {
-        foreach (var skill in _skills)
-            SaveDataStorage.SaveSkills(skill.SkillType, skill.CurrentValue);
+        if (_scoreCounter.IsCanBuy(new Score(0, GetTotalValue())))
+        {
+            foreach (var skill in _skills)
+                SaveDataStorage.SaveSkills(skill.SkillType, skill.CurrentValue);
 
-        ShowTotal();
+            ShowTotal();
+        }
     }
 
     public void CancelScills()
@@ -33,5 +30,17 @@ public class Skills : MonoBehaviour
         }
 
         ShowTotal();
+    }
+
+    private int GetTotalValue()
+    {
+        int value = 0;
+
+        foreach (var skill in _skills)
+        {
+            value += skill.CurrentValue;
+        }
+
+        return value;
     }
 }

@@ -19,7 +19,6 @@ public class Collections : PanelActivator
         }
     }
 
-
     public void ChooseRunners()
     {
         //SaveDataStorage.SaveCurrentRunners();

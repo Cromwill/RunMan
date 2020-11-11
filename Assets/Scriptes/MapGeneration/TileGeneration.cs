@@ -84,7 +84,6 @@ public class TileGeneration : MonoBehaviour, ITile
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision");
         if (collision.gameObject.GetComponent<Player>() != null)
             CheckPosition?.Invoke(this);
     }

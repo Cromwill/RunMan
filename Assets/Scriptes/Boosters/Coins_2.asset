@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dec9f77e306ef7a47895d38efbe5a54a, type: 3}
-  m_Name: AddScore_2
+  m_Name: Coins_2
   m_EditorClassIdentifier: 
-  _boosterType: 3
-  _changingValue: 4
-  _price: 1000
-  _descriptions: Add score
-  _itemName: Score++
+  _boosterType: 4
+  _changingValue: 10
+  _price: 90
+  _descriptions: Coins
+  _itemName: Coins
   _currencyType: 0
-  _itemViewer: {fileID: 4233259282074515840, guid: 8b3db9137ca05a545b41063f359e418e,
-    type: 3}
-  _itemType: 1
+  _itemViewer: {fileID: 21300000, guid: 32ebfeb6f2ca82440a278bc76bbe1822, type: 3}
+  _itemType: 0
