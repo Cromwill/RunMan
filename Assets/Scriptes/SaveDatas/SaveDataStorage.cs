@@ -39,15 +39,15 @@ public static class SaveDataStorage
         return PlayerPrefs.GetInt("CurrentAvatarId");
     }
 
-    public static void SaveSkills(SkillType skillType, int value)
+    public static void SaveSkills(string skillName, int value)
     {
-        PlayerPrefs.SetInt("SavedSkill_" + skillType.ToString(), value);
+        PlayerPrefs.SetInt("SavedSkill_" + skillName, value);
         PlayerPrefs.Save();
     }
 
-    public static int LoadSkills(SkillType skillType)
+    public static int LoadSkills(string skillName)
     {
-        return PlayerPrefs.GetInt("SavedSkill_" + skillType.ToString());
+        return PlayerPrefs.GetInt("SavedSkill_" + skillName);
     }
 
     public static void SaveScore(Score score)

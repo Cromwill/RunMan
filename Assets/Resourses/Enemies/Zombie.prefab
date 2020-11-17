@@ -2083,11 +2083,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d42b1bda9d4ab49bcc9dcd53ce9ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 300
+  _speed: 250
   _deadEffect: {fileID: 4029307394000726617, guid: 43b758984af4dda47a41a8b5e203ba95,
     type: 3}
-  _maxTurnSpeed: 0.5
-  _minTurnSpeed: 1
+  _maxTurnSpeed: 0.25
+  _minTurnSpeed: 0.7
   _player: {fileID: 0}
 --- !u!136 &5667338615085347083
 CapsuleCollider:

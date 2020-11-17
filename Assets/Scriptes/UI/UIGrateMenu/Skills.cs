@@ -16,7 +16,7 @@ public class Skills : MonoBehaviour
         if (_scoreCounter.IsCanBuy(new Score(0, GetTotalValue())))
         {
             foreach (var skill in _skills)
-                SaveDataStorage.SaveSkills(skill.SkillType, skill.CurrentValue);
+                SaveDataStorage.SaveSkills(skill.SkillKey, skill.SkillValue);
 
             ShowTotal();
         }
@@ -26,7 +26,7 @@ public class Skills : MonoBehaviour
     {
         foreach(var skill in _skills)
         {
-            skill.SetValue(SaveDataStorage.LoadSkills(skill.SkillType));
+            skill.SetValue(SaveDataStorage.LoadSkills(skill.SkillKey));
         }
 
         ShowTotal();

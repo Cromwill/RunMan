@@ -11,6 +11,8 @@ public class SkillData : ScriptableObject
 
     [SerializeField] private string _saveKey;
 
+    public string skillKey => _saveKey;
+
     public int GetPrice(int count)
     {
         return (int)(Mathf.Pow(_incrementStep, count) - 1) * _basePrice;
