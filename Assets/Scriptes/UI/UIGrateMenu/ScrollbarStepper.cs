@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ScrollbarStepper : MonoBehaviour
@@ -7,6 +8,8 @@ public class ScrollbarStepper : MonoBehaviour
     [SerializeField] private float[] _steps;
     [SerializeField] private Scrollbar _scrollbar;
     [SerializeField] private float _time;
+
+    [SerializeField] private bool _isAppForMobile;
 
     private bool _isStartScreenMoved;
 
@@ -36,15 +39,22 @@ public class ScrollbarStepper : MonoBehaviour
     private void StartValueChanging()
     {
         ScrollDirection direction = _currentPositionValue > _scrollbar.value ? ScrollDirection.Left : ScrollDirection.Right;
-
-        for (int i = 0; i < _steps.Length - 1; i++)
+        if (_scrollbar.value < 0 || _scrollbar.value > 1)
         {
-            if(IsValueIsInRange( _scrollbar.value, _steps[i], _steps[i+1]))
+            bool isValueLessThanZero = _scrollbar.value < 0;
+            _finishPosition = isValueLessThanZero ? 0 : 1;
+            direction = isValueLessThanZero ? ScrollDirection.Right : ScrollDirection.Left;
+        }
+        else
+        {
+            for (int i = 0; i < _steps.Length - 1; i++)
             {
-                _finishPosition = direction == ScrollDirection.Left ? _steps[i] : _steps[i + 1];
+                if (IsValueIsInRange(_scrollbar.value, _steps[i], _steps[i + 1]))
+                {
+                    _finishPosition = direction == ScrollDirection.Left ? _steps[i] : _steps[i + 1];
+                }
             }
         }
-
         float changingSpeed = Mathf.Abs(_finishPosition - _scrollbar.value) / _time;
 
         StartCoroutine(ScrollbarValueChanging(direction, changingSpeed));
@@ -62,7 +72,7 @@ public class ScrollbarStepper : MonoBehaviour
         _currentPositionValue = _finishPosition;
     }
 
-    private bool IsValueChanging(ScrollDirection direction) => _finishPosition < _currentPositionValue ? 
+    private bool IsValueChanging(ScrollDirection direction) => _finishPosition < _currentPositionValue ?
         _scrollbar.value > _finishPosition : _scrollbar.value < _finishPosition;
 
     private bool IsValueIsInRange(float value, float min, float max) => value >= min && value <= max;
@@ -71,6 +81,11 @@ public class ScrollbarStepper : MonoBehaviour
     {
         Left = -1,
         Right = 1
+    }
+
+    private bool GetPointerOverGameObject()
+    {
+        return _isAppForMobile ? !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) : !EventSystem.current.IsPointerOverGameObject();
     }
 
 }

@@ -238,7 +238,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxEnemiesCount: 3
-  _enemy: {fileID: 3868327032782388099, guid: 65b1cdd79837640448bd8b9b88eed78b, type: 3}
+  _enemies:
+  - {fileID: 3868327032782388099, guid: 65b1cdd79837640448bd8b9b88eed78b, type: 3}
+  - {fileID: 2645552593700334684, guid: c9b69e592d2d2bb49a14844ddc32a987, type: 3}
+  - {fileID: 5206224383181965699, guid: c8bad1a35af54ad479d0877dd461b270, type: 3}
+  - {fileID: 8434985149178655858, guid: aeac107dd1a90374aaf81796674abf79, type: 3}
   _spawnTime: 5
 --- !u!1 &5709601181040366040
 GameObject:
