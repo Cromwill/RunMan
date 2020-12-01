@@ -9,7 +9,6 @@ public class LevelConstructor : MonoBehaviour
     [SerializeField] private int _horizontalRange;
     [SerializeField] private MapElementPool _pool;
     [SerializeField] private GameObject _startTileGameObject;
-    [SerializeField] private NavMeshRebaker _rebaker;
 
     private ITile _startTile;
     private List<ITile> _currentTiles;
@@ -41,17 +40,11 @@ public class LevelConstructor : MonoBehaviour
         float tileXSize = currentTile.GetSize().x;
         float tileZSize = currentTile.GetSize().z;
 
-        float maxXPosition = currentTile.GetPosition().x + tileXSize * _horizontalRange;
-        float minXPosition = currentTile.GetPosition().x - tileXSize * _horizontalRange;
-        float maxZPosition = currentTile.GetPosition().z + tileZSize * _verticalRange;
-        float minZPosition = currentTile.GetPosition().z - tileZSize * _verticalRange;
-
-
         List<Vector3> requiredCoordinates = new List<Vector3>();
 
         for (int i = _horizontalRange * -1; i <= _horizontalRange; i++)
         {
-            for (int j = _verticalRange * -1; j <= _verticalRange; j++)
+            for (int j = (_verticalRange / 2) * -1; j <= _verticalRange; j++)
             {
                 float xPosition = currentTile.GetPosition().x + i * tileXSize;
                 float zPosition = currentTile.GetPosition().z + j * tileZSize;
@@ -77,6 +70,10 @@ public class LevelConstructor : MonoBehaviour
     private ITile GenerateTile(Vector3 position, bool isFirstTile = false)
     {
         ITile tile = _pool.GetTile();
+        tile.ReturningToPool += delegate(ITile currentTile)
+        {
+            _currentTiles.Remove(currentTile);
+        };
         tile.SetPosition(position);
         tile.CheckPosition += GenerateLevel;
         return tile;

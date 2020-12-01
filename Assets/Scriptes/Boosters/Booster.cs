@@ -32,5 +32,6 @@ public enum BoosterType
     Damage,
     Item,
     Score,
+    Life,
     Coin
 }

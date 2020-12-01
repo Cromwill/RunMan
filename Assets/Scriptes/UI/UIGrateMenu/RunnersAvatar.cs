@@ -1,17 +1,9 @@
 ﻿using UnityEngine;
 
-public class RunnersAvatar : MonoBehaviour, IBuyableObject
+public class RunnersAvatar : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private bool _isPresentation;
-
-    [SerializeField] private float _price;
-    [SerializeField] private int _playerId;
-    [SerializeField] private string _type;
-
-    public float Price => _price;
-    public string Type => _type;
-    public int Id => _playerId;
 
     private void Update()
     {

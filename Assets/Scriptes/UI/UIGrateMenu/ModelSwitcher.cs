@@ -13,7 +13,7 @@ public class ModelSwitcher : MonoBehaviour
     {
         _modelViewer.ToggleActiveObject(_isShop, this);
         if (_isShop)
-            _buyPanel.PurchaseСonfirmed += _modelViewer.ChangePrice;
+            _buyPanel.PurchaseСonfirmed += ChangePriceAfterPurChase;
     }
 
     private void OnDisable()
@@ -28,11 +28,26 @@ public class ModelSwitcher : MonoBehaviour
     {
         _isSold = isSold;
         string priceText = _isSold ? "sold" : price.ToString("0.##") + "$";
-        _priceViewer.text = priceText;
+        if (_isShop)
+            _priceViewer.text = priceText;
+    }
+
+    public void ChangePriceAfterPurChase()
+    {
+        _modelViewer.ToggleActiveObject(_isShop, this);
     }
 
     public void BuyAvatar()
     {
-        _buyPanel.OpenPanel(_modelViewer.RunnerAvatar, _isSold);
+        _buyPanel.OpenPanel(_modelViewer.getCurrentAvatar, _isSold);
     }
+
+    public void ChooseRunners()
+    {
+        SaveDataStorage.SaveCurrentRunner(_modelViewer.getCurrentAvatar);
+        Debug.Log("save runners");
+    }
+
+    public void NextAvatar() => _modelViewer.SetNextAvatar(1);
+    public void PrevAvatar() => _modelViewer.SetNextAvatar(-1);
 }

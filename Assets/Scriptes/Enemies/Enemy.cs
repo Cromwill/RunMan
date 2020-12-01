@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-//общий класс монстров для огра и зомби
 public class Enemy : MonoBehaviour, IDeadable
 {
     [SerializeField] private int _speed;
     [SerializeField] private EffectCicle _deadEffect;
     [SerializeField] private float _maxTurnSpeed;
     [SerializeField] private float _minTurnSpeed;
-    [SerializeField] 
+    [SerializeField] private float _defualtLife;
 
     private Transform _player;
     private Rigidbody _selfRigidbody;
@@ -43,6 +41,11 @@ public class Enemy : MonoBehaviour, IDeadable
     {
         EffectCicle effectCicle = Instantiate(_deadEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
+
+    }
+
+    public void AddDamage()
+    {
 
     }
 

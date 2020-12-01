@@ -15,4 +15,6 @@ MonoBehaviour:
   _basePrice: 5
   _incrementStep: 2
   _type: 0
+  _boosterType: 0
   _saveKey: RunningSpeed
+  _multiplier: 1.03

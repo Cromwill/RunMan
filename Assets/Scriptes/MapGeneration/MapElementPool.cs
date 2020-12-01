@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,13 +11,14 @@ public class MapElementPool : MonoBehaviour
     [SerializeField] private List<MapElement> _destroyObjects;
     [SerializeField] private List<TileGeneration> _tiles;
     [SerializeField] private int _tilesCount;
+    [SerializeField] private int _startTilesCount;
 
     private ITile[] _tilePool;
 
     private void Awake()
     {
         Time.timeScale = 1;
-        GeneratePool();
+        GeneratePool(_tilesCount);
     }
     public IMapElement GetNonDestroyObject(Transform parent)
     {
@@ -61,15 +63,23 @@ public class MapElementPool : MonoBehaviour
         }
     }
 
-    private void GeneratePool()
+    private void GeneratePool(int count)
     {
-        _tilePool = new ITile[_tilesCount];
+        _tilePool = new ITile[count];
         Vector3 position = transform.position;
 
-        for (int i = 0; i < _tilesCount; i++)
+        for (int i = 0; i < count; i++)
         {
             _tilePool[i] = Instantiate(_tiles[Random.Range(0, _tiles.Count)]);
             _tilePool[i].SetPosition(new Vector3(position.x, position.y - i, position.z));
+        }
+    }
+
+    private IEnumerator GenerateTileByStep()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(20);
         }
     }
 }

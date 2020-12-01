@@ -5,12 +5,11 @@ public class SkillPoints : MonoBehaviour
 {
     [SerializeField] private SkillData _skillData;
     [SerializeField] private Slider _slider;
-    [SerializeField] private SkillType _skillType;
 
     private Skills _skills;
+    private int _savedSkillValue;
 
-    public int CurrentValue { get; private set; }
-    public SkillType SkillType => _skillType;
+    public int Coast { get; private set; }
     public string SkillKey => _skillData.skillKey;
     public int SkillValue => (int)_slider.value;
 
@@ -19,23 +18,31 @@ public class SkillPoints : MonoBehaviour
         _slider.onValueChanged.AddListener(ValueChange);
         if (_skills == null)
             _skills = GetComponentInParent<Skills>();
-
-        SetValue(SaveDataStorage.LoadSkills(_skillData.skillKey));
-
-        Score score1 = new Score(30, 10);
-        Score score2 = new Score(20, 20);
+        _savedSkillValue = SaveDataStorage.LoadSkills(SkillKey);
+        DataReset();
     }
 
     public void ValueChange(float value)
     {
-        CurrentValue =  _skillData.GetPrice((int)_slider.value);
+        Coast = _skillData.GetPrice((int)_slider.value);
+        if (_slider.value < _savedSkillValue)
+            Coast *= -1;
+        else if (_slider.value == _savedSkillValue)
+            Coast = 0;
+
         _skills.ShowTotal();
     }
 
-    public void SetValue(int value)
+    public void DataReset()
     {
-        _slider.value = value;
-        CurrentValue = value;
-        _skills.ShowTotal();
+        _slider.value = SaveDataStorage.LoadSkills(SkillKey);
+        ValueChange(0);
+    }
+
+    public void DataSave()
+    {
+        SaveDataStorage.SaveSkills(_skillData.skillKey, SkillValue);
+        _savedSkillValue = SkillValue;
+        ValueChange(0);
     }
 }

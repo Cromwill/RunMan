@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-//класс джойстика, просто игроку указывается объект с которого читать данные, может и с него самого и дальше просто вызываются нужные методы
 public class MobileInputter : MonoBehaviour, IInputter
 {
     [SerializeField] private Player _player;
@@ -25,6 +24,4 @@ public class MobileInputter : MonoBehaviour, IInputter
         RotateDirection direction = ScreenToViewportPoint.x < 0.5f ? RotateDirection.Left : RotateDirection.Right;
         _player.Turn(direction);
     }
-
-    private void InputerOff() => _isPlayerDead = true;
 }

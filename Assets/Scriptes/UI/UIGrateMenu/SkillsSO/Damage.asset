@@ -15,4 +15,6 @@ MonoBehaviour:
   _basePrice: 5
   _incrementStep: 2
   _type: 3
+  _boosterType: 1
   _saveKey: Damage
+  _multiplier: 1

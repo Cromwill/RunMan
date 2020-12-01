@@ -1,73 +1,85 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ModelViewer : MonoBehaviour
 {
-    [SerializeField] private GameObject _avatar;
-    [SerializeField] private PlayersRepository _playersRepository;
-    [SerializeField] private Animator _toggleAvatarAnimator;
-    [SerializeField] private Vector3 _instantiatePosition;
-
+    [SerializeField] private PlayerSkinData[] _skins;
+    [SerializeField] private PlayerSkinData _defaultSkin;
     private ModelSwitcher _switcher;
-    private GameObject _newAvatar;
+    private PlayerSkins _avatar;
     private bool _isShop;
-    private List<int> _openedAvatars = new List<int>();
+    private int[] _openedAvatars;
+    private int _currentIdSkin;
+    private Animator _selfAnimator;
 
-    public RunnersAvatar RunnerAvatar => _avatar.GetComponent<RunnersAvatar>();
+    public IBuyableObject getCurrentAvatar => _skins.Where(a => a.Id == _currentIdSkin).FirstOrDefault();
+
+    private void Start()
+    {
+        _avatar = GetComponentInChildren<PlayerSkins>();
+        _selfAnimator = GetComponent<Animator>();
+
+        Debug.Log(_avatar);
+    }
 
     public void ToggleActiveObject(bool isShop, ModelSwitcher switcher)
     {
-        gameObject.SetActive(!gameObject.activeSelf);
         _isShop = isShop;
+        _switcher = switcher;
 
-        if (gameObject.activeSelf)
-            _switcher = switcher;
-
-        if (_isShop)
+        if(!SaveDataStorage.HasKeyBuyableObjecty(_defaultSkin))
         {
-            if (_avatar == null)
-            {
-                _avatar = Instantiate(_playersRepository.GetAvatar(0), _toggleAvatarAnimator.GetComponent<Transform>());
-                _avatar.transform.localPosition = _instantiatePosition;
-            }
-            ChangePrice();
+            _currentIdSkin = _defaultSkin.Id;
+            _avatar.SetSkin(_defaultSkin);
+            SaveDataStorage.SaveBuyableObject(_defaultSkin);
+            ToggleActiveObject(_isShop, _switcher);
         }
         else
         {
-            if (_avatar == null)
-            {
-                _avatar = Instantiate(_playersRepository.GetAvatarFromId(SaveDataStorage.LoadCurrentRunnersId()), _toggleAvatarAnimator.GetComponent<Transform>());
-                _avatar.transform.localPosition = _instantiatePosition;
-            }
+            _currentIdSkin = SaveDataStorage.LoadCurrentRunnersId();
+            _openedAvatars = SaveDataStorage.LoadOpenedRunnersIds();
+            _avatar.SetSkin(_skins.Where(a => a.Id == _currentIdSkin).First());
+            ChangePrice();
         }
+
+
     }
 
-    public void SetNextAvatar()
+    public void SetNextAvatar(int direction)
     {
-        _toggleAvatarAnimator.Play("ClearAvatar");
-        _newAvatar = _playersRepository.GetNextAvatar();
+        _selfAnimator.SetInteger("Direction", direction);
+        _selfAnimator.Play("ChangeAvatar");
     }
 
-    public void SetPrevAvatar()
-    {
-        _toggleAvatarAnimator.Play("ClearAvatar");
-        _newAvatar = _playersRepository.GetPrevAvatar();
-    }
 
     public void ChengeAvatar()
     {
-        Destroy(_avatar.gameObject);
-        _avatar = Instantiate(_newAvatar, _toggleAvatarAnimator.GetComponent<Transform>());
-        _avatar.transform.localPosition = _instantiatePosition;
+        int newId = _currentIdSkin + _selfAnimator.GetInteger("Direction");
+
+        if (_isShop)
+        {
+            if(newId > 0 && newId <= _skins.Length)
+            {
+                _currentIdSkin = newId;
+                _avatar.SetSkin(_skins.Where(a=> a.Id == newId).First());
+            }
+        }
+        else
+        {
+            if (_openedAvatars.Contains(newId))
+            {
+                _currentIdSkin = newId;
+                _avatar.SetSkin(_skins.Where(a => a.Id == newId).First());
+            }
+        }
+        
         ChangePrice();
     }
 
     public void ChangePrice()
     {
-        var selfAvatars = SaveDataStorage.LoadOpenedRunnersIds(_playersRepository.maxAvatarsCount);
-        RunnersAvatar runnersAvatar = _avatar.GetComponent<RunnersAvatar>();
-        bool isSold = selfAvatars.Contains(runnersAvatar.Id);
-        _switcher.ChangePrice(runnersAvatar.Price, isSold);
+        _switcher.ChangePrice(_skins.Where(a => a.Id == _currentIdSkin).First().Price, _openedAvatars.Contains(_currentIdSkin));
     }
 }

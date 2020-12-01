@@ -1,41 +1,56 @@
 ﻿using UnityEngine;
 
-public class ScoreCounter : MonoBehaviour
+public class ScoreCounter : MonoBehaviour, IPlayerComponent
 {
     [SerializeField] private ScoreTerms _scoreTerms;
+    [SerializeField] private ScoreVieweronlevel _scoreViewer;
+    [SerializeField] private BoosterType _type;
+
     private Vector3 _oldPosition;
-    private ScoreVieweronlevel _scoreViewer;
+    private float _scoreMultiplier = 1;
 
-    public int score => _scoreTerms.DistanceToScore(distance);
+    public int score => (int)(_scoreTerms.DistanceToScore(distance) * _scoreMultiplier);
     public float distance { get; private set; }
-
     public int money => _scoreTerms.ScoreToMoney(score);
+    public BoosterType BoosterType => _type;
 
-    public void Initialization(ScoreVieweronlevel scoreViewer)
+    public void Initialization(params Booster[] boosters)
     {
         _oldPosition = PositionColculation(transform.position);
-        _scoreViewer = scoreViewer;
+
+        if (boosters != null)
+        {
+            foreach (Booster booster in boosters)
+                UsedBooster(booster);
+        }
     }
 
+    public void UsedSkill(SkillData skill, int count)
+    {
+    }
     public void DistanceColculate()
     {
         Vector3 currentPosition = PositionColculation(transform.position);
         distance += Vector3.Distance(currentPosition, _oldPosition);
         _oldPosition = currentPosition;
 
-        _scoreViewer.ShowDistance(distance);
+        if (_scoreViewer != null)
+            _scoreViewer.ShowDistance(distance);
 
         AddScore(score);
     }
 
     public void AddScore(int value)
     {
-        _scoreViewer.ShowScore(value);
+        if (_scoreViewer != null)
+            _scoreViewer.ShowScore(value);
     }
 
-    private Vector3 PositionColculation(Vector3 objectPosition)
+    private void UsedBooster(Booster booster)
     {
-        return new Vector3(objectPosition.x, 0, objectPosition.z);
+        _scoreMultiplier += booster.Value;
     }
+
+    private Vector3 PositionColculation(Vector3 objectPosition) => new Vector3(objectPosition.x, 0, objectPosition.z);
 }
 

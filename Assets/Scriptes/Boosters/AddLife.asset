@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec9f77e306ef7a47895d38efbe5a54a, type: 3}
   m_Name: AddLife
   m_EditorClassIdentifier: 
-  _boosterType: 0
+  _boosterType: 4
   _changingValue: 1
   _price: 200
   _descriptions: add life

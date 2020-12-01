@@ -12,4 +12,5 @@ public interface ITile
     void AddSpawner(EnemiesSpawner spawner);
 
     event Action<ITile> CheckPosition;
+    event Action<ITile> ReturningToPool;
 }

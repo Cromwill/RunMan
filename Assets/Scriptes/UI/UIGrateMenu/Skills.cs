@@ -13,11 +13,15 @@ public class Skills : MonoBehaviour
     }
     public void ConfirmSkills()
     {
-        if (_scoreCounter.IsCanBuy(new Score(0, GetTotalValue())))
-        {
-            foreach (var skill in _skills)
-                SaveDataStorage.SaveSkills(skill.SkillKey, skill.SkillValue);
+        Score price = new Score(0, GetTotalValue());
 
+        if (_scoreCounter.IsCanBuy(price))
+        {
+            _scoreCounter.ReduceScore(price);
+            foreach (var skill in _skills)
+            {
+                skill.DataSave();
+            }
             ShowTotal();
         }
     }
@@ -26,7 +30,7 @@ public class Skills : MonoBehaviour
     {
         foreach(var skill in _skills)
         {
-            skill.SetValue(SaveDataStorage.LoadSkills(skill.SkillKey));
+            skill.DataReset();
         }
 
         ShowTotal();
@@ -38,7 +42,7 @@ public class Skills : MonoBehaviour
 
         foreach (var skill in _skills)
         {
-            value += skill.CurrentValue;
+            value += skill.Coast;
         }
 
         return value;

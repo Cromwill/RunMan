@@ -14,6 +14,7 @@ public class TileGeneration : MonoBehaviour, ITile
     public bool IsInThePool { get; set; } = true;
     public bool IsHaveFog { get; private set; }
     public event Action<ITile> CheckPosition;
+    public event Action<ITile> ReturningToPool;
 
     private void OnDrawGizmosSelected()
     {
@@ -66,6 +67,7 @@ public class TileGeneration : MonoBehaviour, ITile
     {
         fog.Destriction -= ReturnToPool;
         IsHaveFog = false;
+        ReturningToPool?.Invoke(this);
 
         if (_spawner != null)
             Destroy(_spawner.gameObject);

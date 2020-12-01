@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class EnemiesConstructor : MonoBehaviour
 {
@@ -19,18 +20,35 @@ public class EnemiesConstructor : MonoBehaviour
         var enveromentTiles = GetTilesOfRange(tiles, min, max);
         var tilesToGenerate = GetTilesOfRange(enveromentTiles, min + new Vector3(0, 0, 2 * tileLenght), max);
 
-        if (_currentSpawners == null)
+        Vector3 minVector = new Vector3(0, tiles[0].GetPosition().y, 0);
+        Vector3 maxVector = new Vector3(0, tiles[0].GetPosition().y, 0);
+
+        foreach (var tile in tiles)
         {
-            _currentSpawners = new List<SpawnDotData>();
+            Vector3 position = tile.GetPosition();
+
+            if (position.x < minVector.x)
+                minVector.x = position.x;
+            if (position.x > maxVector.x)
+                maxVector.x = position.x;
+            if (position.z < minVector.z)
+                minVector.z = position.z;
+            if (position.z > maxVector.z)
+                maxVector.z = position.z;
+        }
+
+        ITile minTile = tiles.Where(a => a.GetPosition().x == minVector.x && a.GetPosition().z == minVector.z).First();
+        ITile maxTile = tiles.Where(a => a.GetPosition().x == maxVector.x && a.GetPosition().z == maxVector.z).First();
+
+        Debug.Log("MinTile - " + minTile.GetPosition());
+        Debug.Log("MaxTile - " + maxTile.GetPosition());
+
+
+        if (_currentSpawners.Where(spawner => spawner.IsInRange(min, max)).Count() == 0)
+        {
             SetSpawnerOnScene(tilesToGenerate[Random.Range(0, tilesToGenerate.Length)]);
         }
-        else
-        {
-            if (_currentSpawners.Where(spawner => spawner.IsInRange(min, max)).Count() == 0)
-            {
-                SetSpawnerOnScene(tilesToGenerate[Random.Range(0, tilesToGenerate.Length)]);
-            }
-        }
+
     }
 
     private void SetSpawnerOnScene(ITile tile)
@@ -69,7 +87,7 @@ public class SpawnDotData
 
     public void SetConnectionWithTile()
     {
-        if(Tile != null && Spawner != null)
+        if (Tile != null && Spawner != null)
         {
             Tile.AddSpawner(Spawner);
         }

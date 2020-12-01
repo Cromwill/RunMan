@@ -51,6 +51,7 @@ public class ExitPanel : MonoBehaviour
 
     private void OpenPanel(bool isGameOver)
     {
+        Time.timeScale = isGameOver ? 1 : 0;
         gameObject.SetActive(true);
         SetActiveForSeveralObject(isGameOver, _scoreValue.gameObject, _distanceValue.gameObject);
         SetActiveForSeveralObject(isGameOver, _someObjectsForchangeActivation);

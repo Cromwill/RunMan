@@ -1,6 +1,6 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class SaveDataStorage
@@ -9,8 +9,7 @@ public static class SaveDataStorage
     {
         if (buyable.Type == "avatar")
         {
-            PlayerPrefs.SetInt("Type_" + buyable.Type + "_Id_" + buyable.Id, buyable.Id);
-            PlayerPrefs.SetInt("CurrentAvatarId", buyable.Id);
+            SaveAvatar(buyable);
         }
         else
         {
@@ -19,25 +18,34 @@ public static class SaveDataStorage
         PlayerPrefs.Save();
     }
 
-    public static List<int> LoadOpenedRunnersIds(int maxValue)
+    public static void SaveCurrentRunner(IBuyableObject avatar)
     {
-        List<int> avatarIds = new List<int>();
+        int[] savedAvatars = LoadOpenedRunnersIds();
 
-        for (int i = 0; i <= maxValue; i++)
+        if(savedAvatars.Contains(avatar.Id))
         {
-            if (PlayerPrefs.HasKey("Type_Avatar_Id_" + i))
+            PlayerPrefs.SetInt("CurrentAvatarId", avatar.Id);
+        }
+
+        PlayerPrefs.Save();
+    }
+
+    public static int[] LoadOpenedRunnersIds()
+    {
+        int[] avatarIds = new int[PlayerPrefs.GetInt("OpenAvatarCount")];
+
+        for (int i = 0; i < avatarIds.Length; i++)
+        {
+            if (PlayerPrefs.HasKey("Avatar_number_" + (i + 1)))
             {
-                avatarIds.Add(PlayerPrefs.GetInt("Type_Avatar_Id_" + i));
+                avatarIds[i] = (PlayerPrefs.GetInt("Avatar_number_" + (i + 1)));
             }
         }
 
         return avatarIds;
     }
 
-    public static int LoadCurrentRunnersId()
-    {
-        return PlayerPrefs.GetInt("CurrentAvatarId");
-    }
+    public static int LoadCurrentRunnersId() => PlayerPrefs.GetInt("CurrentAvatarId");
 
     public static void SaveSkills(string skillName, int value)
     {
@@ -85,7 +93,47 @@ public static class SaveDataStorage
             return false;
     }
 
-    
+    public static bool HasKeyBuyableObjecty(IBuyableObject buyabl)
+    {
+        if (buyabl.Type == "avatar")
+            return PlayerPrefs.HasKey("CurrentAvatarId");
+        else
+            return false;
+
+    }
+
+    private static void SaveAvatar(IBuyableObject buyable)
+    {
+        int avatarsCount = PlayerPrefs.GetInt("OpenAvatarCount");
+        int[] savedAvatars = LoadOpenedRunnersIds();
+        bool isDubleAvatar = false;
+
+        if (avatarsCount != 0)
+        {
+            foreach (int id in savedAvatars)
+            {
+                if (id == buyable.Id)
+                    isDubleAvatar = true;
+            }
+
+            if (!isDubleAvatar)
+            {
+                WriteAvatarsData(avatarsCount, buyable.Id);
+            }
+        }
+        else
+        {
+            WriteAvatarsData(avatarsCount, buyable.Id);
+        }
+    }
+
+    private static void WriteAvatarsData(int count, int id)
+    {
+        int avatarCoutn = count + 1;
+        PlayerPrefs.SetInt("Avatar_number_" + avatarCoutn, id);
+        PlayerPrefs.SetInt("CurrentAvatarId", id);
+        PlayerPrefs.SetInt("OpenAvatarCount", avatarCoutn);
+    }
 
 }
 

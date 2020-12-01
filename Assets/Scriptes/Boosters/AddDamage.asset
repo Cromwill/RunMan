@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AddDamage
   m_EditorClassIdentifier: 
   _boosterType: 1
-  _changingValue: 10
+  _changingValue: 1
   _price: 75
   _descriptions: add damage
   _itemName: Damage

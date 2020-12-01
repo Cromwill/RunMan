@@ -19,12 +19,6 @@ public class Collections : PanelActivator
         }
     }
 
-    public void ChooseRunners()
-    {
-        //SaveDataStorage.SaveCurrentRunners();
-        Debug.Log("save runners");
-    }
-
     public void SelectedButton(Image currentImage)
     {
         currentImage.color = _selectedColor;

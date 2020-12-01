@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec9f77e306ef7a47895d38efbe5a54a, type: 3}
   m_Name: Coins_2
   m_EditorClassIdentifier: 
-  _boosterType: 4
+  _boosterType: 5
   _changingValue: 10
   _price: 90
   _descriptions: Coins

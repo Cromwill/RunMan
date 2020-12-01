@@ -15,4 +15,6 @@ MonoBehaviour:
   _basePrice: 5
   _incrementStep: 2
   _type: 2
+  _boosterType: 1
   _saveKey: RateOfFire
+  _multiplier: 1.05

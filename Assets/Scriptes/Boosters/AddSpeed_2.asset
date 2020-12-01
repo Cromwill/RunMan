@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: AddSpeed_2
   m_EditorClassIdentifier: 
   _boosterType: 0
-  _changingValue: 1.2
+  _changingValue: 20
   _price: 200
   _descriptions: Add speed
   _itemName: speed++
   _currencyType: 0
   _itemViewer: {fileID: 21300000, guid: 2ab4a78c14056374fae9c0a01b2ff593, type: 3}
+  _itemType: 0

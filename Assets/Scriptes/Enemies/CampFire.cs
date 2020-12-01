@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//класс отвечающий за правила появления зомби на сцене, вещается на игровой объект вокруг которого появляются зомби
+
 public class CampFire : MonoBehaviour
 {
     public GameObject zombie_Prefab;
