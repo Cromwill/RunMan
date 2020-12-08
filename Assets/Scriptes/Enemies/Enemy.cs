@@ -1,62 +1,57 @@
 ﻿using UnityEngine;
+using System;
+using Random = UnityEngine.Random;
+using System.Collections;
 
 public class Enemy : MonoBehaviour, IDeadable
 {
-    [SerializeField] private int _speed;
-    [SerializeField] private EffectCicle _deadEffect;
-    [SerializeField] private float _maxTurnSpeed;
-    [SerializeField] private float _minTurnSpeed;
-    [SerializeField] private float _defualtLife;
+    [SerializeField] protected int _speed;
+    [SerializeField] protected EffectCicle _deadEffect;
+    [SerializeField] protected float _maxTurnSpeed;
+    [SerializeField] protected float _minTurnSpeed;
+    [SerializeField] protected float _defualtLife;
+    [SerializeField] protected float _reactionTime;
 
-    private Transform _player;
-    private Rigidbody _selfRigidbody;
-    private Animator _selfAnimator;
+    protected Transform _player;
+    protected Rigidbody _selfRigidbody;
+    protected Animator _selfAnimator;
 
-    private Collider _selfColider;
-    private float _turnSpeed;
+    protected float _turnSpeed;
+    protected bool _isPlayerFounded = false;
+    protected event Action<Enemy> Deading;
+    protected bool _isDead = false;
 
     void Start()
     {
-        _player = FindObjectOfType<Player>().transform;
         _selfRigidbody = GetComponent<Rigidbody>();
-        _selfColider = GetComponent<CapsuleCollider>();
+        _selfAnimator = GetComponent<Animator>();
+        _selfAnimator.SetBool("Stop", true);
         _turnSpeed = Random.Range(_minTurnSpeed, _maxTurnSpeed);
     }
 
-    private void FixedUpdate()
+    protected virtual void OnCollisionEnter(Collision collision)
     {
-        Turn();
-        _selfRigidbody.velocity = transform.forward.normalized * _speed * Time.fixedDeltaTime;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.GetComponent<Player>() != null)
+        if (collision.gameObject.GetComponent<Player>() != null && !_isDead)
         {
             collision.gameObject.GetComponent<Player>().Dead();
         }
     }
 
-    public void Dead()
+    public virtual void SetPlayer(Player player)
     {
-        EffectCicle effectCicle = Instantiate(_deadEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-
+        _player = player.GetComponent<Transform>();
+        transform.LookAt(_player);
     }
 
-    public void AddDamage()
+    public virtual void Dead()
     {
-
+        Deading?.Invoke(this);
     }
 
-    private void Turn()
+    public void AddDamage(float damage)
     {
-        Vector3 direction = _player.transform.position - transform.position;
-        float step = _turnSpeed * Time.fixedDeltaTime;
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction.normalized, step, 0.0f);
-        Debug.DrawRay(transform.position, newDirection, Color.red, 2.0f);
-
-        transform.rotation = Quaternion.LookRotation(newDirection);
+        _defualtLife -= damage;
+        if (_defualtLife <= 0)
+            Dead();
     }
-
 }

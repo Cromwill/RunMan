@@ -5,6 +5,7 @@ public interface ITile
 {
     bool IsInThePool { get; set; }
     bool IsHaveFog { get;}
+    bool IsHaveSpawner { get; }
     void SetPosition(Vector3 position);
     Vector3 GetPosition();
     Vector3 GetSize();

@@ -1,5 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2528582162406456267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8906911240315818508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca00be3a5c0abc4e9c48d26961b8e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 0
+  _deadEffect: {fileID: 0}
+  _maxTurnSpeed: 0
+  _minTurnSpeed: 0
+  _defualtLife: 0
+  _reactionTime: 0
 --- !u!1001 &1232274228877187039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7,6 +25,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4839801098430045247, guid: 65b1cdd79837640448bd8b9b88eed78b,
+        type: 3}
+      propertyPath: _reactionTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4839801098430045247, guid: 65b1cdd79837640448bd8b9b88eed78b,
+        type: 3}
+      propertyPath: _defualtLife
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 738092616151597510, guid: 65b1cdd79837640448bd8b9b88eed78b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -75,12 +103,19 @@ PrefabInstance:
     - target: {fileID: 7674800570840024531, guid: 65b1cdd79837640448bd8b9b88eed78b,
         type: 3}
       propertyPath: m_Name
-      value: Zombie
+      value: Zombie_2
       objectReference: {fileID: 0}
     - target: {fileID: 8756689424754131072, guid: 65b1cdd79837640448bd8b9b88eed78b,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 65b1cdd79837640448bd8b9b88eed78b, type: 3}
+--- !u!1 &8906911240315818508 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7674800570840024531, guid: 65b1cdd79837640448bd8b9b88eed78b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1232274228877187039}
+  m_PrefabAsset: {fileID: 0}

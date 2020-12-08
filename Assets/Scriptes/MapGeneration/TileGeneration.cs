@@ -12,6 +12,7 @@ public class TileGeneration : MonoBehaviour, ITile
     private EnemiesSpawner _spawner;
 
     public bool IsInThePool { get; set; } = true;
+    public bool IsHaveSpawner => _spawner != null;
     public bool IsHaveFog { get; private set; }
     public event Action<ITile> CheckPosition;
     public event Action<ITile> ReturningToPool;
@@ -58,10 +59,7 @@ public class TileGeneration : MonoBehaviour, ITile
         fog.Destriction += ReturnToPool;
     }
 
-    public void AddSpawner(EnemiesSpawner spawner)
-    {
-        _spawner = spawner;
-    }
+    public void AddSpawner(EnemiesSpawner spawner) => _spawner = spawner;
 
     private void ReturnToPool(Fog fog)
     {
@@ -89,6 +87,8 @@ public class TileGeneration : MonoBehaviour, ITile
         if (collision.gameObject.GetComponent<Player>() != null)
             CheckPosition?.Invoke(this);
     }
+
+
 }
 
 public enum MapElementTypes

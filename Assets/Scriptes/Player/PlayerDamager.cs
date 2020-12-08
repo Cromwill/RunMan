@@ -60,7 +60,7 @@ public class PlayerDamager : MonoBehaviour, IPlayerComponent
         {
             _bulletCount--;
             _armorViewer.Show(_bulletCount);
-            enemy.Dead();
+            enemy.AddDamage(_defaultDamage);
         }
     }
 }

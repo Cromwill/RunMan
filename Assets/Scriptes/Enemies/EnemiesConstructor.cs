@@ -1,54 +1,65 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+
 
 public class EnemiesConstructor : MonoBehaviour
 {
     [SerializeField] private EnemiesSpawner _spawner;
     [SerializeField] private Vector3 _spawnRect;
+    [SerializeField] private Enemy _ogre;
+    [SerializeField] private EnemiesSpawner _rocket;
+
+    private bool _isOgreGenerateStarted;
+    private bool _isRocketGenerateStarted;
 
     private List<SpawnDotData> _currentSpawners = new List<SpawnDotData>();
+    private IEnemySpawnGenerator _spawnGenerator;
 
+    private void Start()
+    {
+        _spawnGenerator = new EnemySpawnGenerator(_spawnRect);
+        StartCoroutine(GenerateOgre(10));
+        StartCoroutine(GenerateRocket(20));
+    }
     public void GenerateEnemeSpawners(ITile[] tiles, ITile currentTile)
     {
-        float tileLenght = currentTile.GetSize().x;
-        Vector3 min = currentTile.GetPosition() - new Vector3(tileLenght * _spawnRect.x, 0, 0);
-        Vector3 max = currentTile.GetPosition() + new Vector3(tileLenght * _spawnRect.x, 0, tileLenght * _spawnRect.z);
+        if (_spawnGenerator == null)
+            _spawnGenerator = new EnemySpawnGenerator(_spawnRect);
 
-        var enveromentTiles = GetTilesOfRange(tiles, min, max);
-        var tilesToGenerate = GetTilesOfRange(enveromentTiles, min + new Vector3(0, 0, 2 * tileLenght), max);
+        var tilesToGenerate = _spawnGenerator.GetTilesToSpawn(tiles, currentTile);
 
-        Vector3 minVector = new Vector3(0, tiles[0].GetPosition().y, 0);
-        Vector3 maxVector = new Vector3(0, tiles[0].GetPosition().y, 0);
-
-        foreach (var tile in tiles)
+        if (tilesToGenerate.Length > 0)
         {
-            Vector3 position = tile.GetPosition();
-
-            if (position.x < minVector.x)
-                minVector.x = position.x;
-            if (position.x > maxVector.x)
-                maxVector.x = position.x;
-            if (position.z < minVector.z)
-                minVector.z = position.z;
-            if (position.z > maxVector.z)
-                maxVector.z = position.z;
+            foreach (var tileToGenerate in tilesToGenerate)
+            {
+                SetSpawnerOnScene(tileToGenerate);
+            }
         }
+    }
 
-        ITile minTile = tiles.Where(a => a.GetPosition().x == minVector.x && a.GetPosition().z == minVector.z).First();
-        ITile maxTile = tiles.Where(a => a.GetPosition().x == maxVector.x && a.GetPosition().z == maxVector.z).First();
-
-        Debug.Log("MinTile - " + minTile.GetPosition());
-        Debug.Log("MaxTile - " + maxTile.GetPosition());
-
-
-        if (_currentSpawners.Where(spawner => spawner.IsInRange(min, max)).Count() == 0)
+    private IEnumerator GenerateOgre(float time)
+    {
+        while (true)
         {
-            SetSpawnerOnScene(tilesToGenerate[Random.Range(0, tilesToGenerate.Length)]);
+            yield return new WaitForSeconds(time);
+            ITile tile = _spawnGenerator.GetTileForEnemy();
+            Vector3 spawnPosition = tile.GetPosition();
+            spawnPosition.y += 2.2f;
+            Instantiate(_ogre, spawnPosition, Quaternion.Euler(0, Random.Range(0, 360), 0));
         }
+    }
 
+    private IEnumerator GenerateRocket(float time)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(time);
+            ITile tile = _spawnGenerator.GetTileForEnemy();
+            Vector3 spawnPosition = tile.GetPosition();
+            spawnPosition.y += 0.5f;
+            Instantiate(_rocket, spawnPosition, Quaternion.identity);
+        }
     }
 
     private void SetSpawnerOnScene(ITile tile)
@@ -59,19 +70,15 @@ public class EnemiesConstructor : MonoBehaviour
         _currentSpawners.Add(spawner);
     }
 
-    private ITile[] GetTilesOfRange(ITile[] array, Vector3 min, Vector3 max)
-    {
-        return array.Where(tile => tile.GetPosition().x >= min.x
-        && tile.GetPosition().x <= max.x
-        && tile.GetPosition().z <= max.z
-        && tile.GetPosition().z >= min.z).ToArray();
-    }
+
 }
 
 public class SpawnDotData
 {
     public ITile Tile;
     public EnemiesSpawner Spawner;
+
+    public Vector3 tilePosition => Tile.GetPosition();
 
     public SpawnDotData(ITile tile)
     {
