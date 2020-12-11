@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour, IDeadable
 {
     [SerializeField] protected int _speed;
     [SerializeField] protected EffectCicle _deadEffect;
+    [SerializeField] protected EffectCicle _hitEffect;
     [SerializeField] protected float _maxTurnSpeed;
     [SerializeField] protected float _minTurnSpeed;
     [SerializeField] protected float _defualtLife;
@@ -48,9 +49,12 @@ public class Enemy : MonoBehaviour, IDeadable
         Deading?.Invoke(this);
     }
 
-    public void AddDamage(float damage)
+    public virtual void AddDamage(float damage)
     {
         _defualtLife -= damage;
+        if(_hitEffect != null)
+            Instantiate(_hitEffect, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z),
+                Quaternion.identity);
         if (_defualtLife <= 0)
             Dead();
     }

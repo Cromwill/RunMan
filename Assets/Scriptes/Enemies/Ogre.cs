@@ -33,7 +33,8 @@ public class Ogre : Enemy, ISearchablePlayers
     public override void Dead()
     {
         _isDead = true;
-        _selfAnimator.SetBool("Death", true);
+        //_selfAnimator.SetBool("Death", true);
+        _selfAnimator.SetTrigger("Death");
         StartCoroutine(StartEffect());
         base.Dead();
     }
@@ -51,11 +52,18 @@ public class Ogre : Enemy, ISearchablePlayers
 
     private void Turn(Vector3 target)
     {
+        target = new Vector3(target.x, target.y + 1.0f, target.z);
         Vector3 direction = target - transform.position;
         float step = _turnSpeed * Time.fixedDeltaTime;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction.normalized, step, 0.0f);
         Debug.DrawRay(transform.position, newDirection, Color.red, 2.0f);
 
         transform.rotation = Quaternion.LookRotation(newDirection);
+    }
+
+    public override void AddDamage(float damage)
+    {
+        _selfAnimator.SetTrigger("Roar");
+        base.AddDamage(damage);
     }
 }

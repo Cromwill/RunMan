@@ -6,17 +6,17 @@ public class RocketLauncher : EnemiesSpawner
 {
     [SerializeField] private Enemy _rocket;
     [SerializeField] private Transform _spawnDot;
-    private Transform _player;
+    private Transform _playerTransform;
 
     void Start()
     {
-        _player = FindObjectOfType<Player>().transform;
+        _playerTransform = FindObjectOfType<Player>().transform;
         StartCoroutine(SpawnEnemy());
     }
 
     void FixedUpdate()
     {
-        transform.LookAt(_player);
+        transform.LookAt(_playerTransform);
     }
 
     protected override IEnumerator SpawnEnemy()

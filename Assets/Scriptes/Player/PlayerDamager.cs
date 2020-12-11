@@ -19,7 +19,8 @@ public class PlayerDamager : MonoBehaviour, IPlayerComponent
     {
         _damageZone = GetComponentInChildren<PlayerDamageZone>();
         _damageZone.FindedEnemies += Shoot;
-        _armorViewer.Show(_bulletCount);
+        if (_armorViewer != null)
+            _armorViewer.Show(_bulletCount);
     }
 
     public void Initialization(params Booster[] boosters)
@@ -33,7 +34,7 @@ public class PlayerDamager : MonoBehaviour, IPlayerComponent
 
     public void UsedSkill(SkillData skill, int count)
     {
-        switch(skill.skillKey)
+        switch (skill.skillKey)
         {
             case "Damage":
                 _defaultDamage *= (skill.Multiplier * count);
@@ -58,6 +59,7 @@ public class PlayerDamager : MonoBehaviour, IPlayerComponent
     {
         if (_bulletCount > 0)
         {
+            Debug.Log("damage");
             _bulletCount--;
             _armorViewer.Show(_bulletCount);
             enemy.AddDamage(_defaultDamage);

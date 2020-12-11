@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0
   _deadEffect: {fileID: 0}
+  _hitEffect: {fileID: 0}
   _maxTurnSpeed: 0
   _minTurnSpeed: 0
   _defualtLife: 0
@@ -35,6 +36,18 @@ PrefabInstance:
       propertyPath: _defualtLife
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4839801098430045247, guid: 65b1cdd79837640448bd8b9b88eed78b,
+        type: 3}
+      propertyPath: _deadEffect
+      value: 
+      objectReference: {fileID: -3406858815362570257, guid: e5df5caad603c8349ba3481b8ded0927,
+        type: 3}
+    - target: {fileID: -4839801098430045247, guid: 65b1cdd79837640448bd8b9b88eed78b,
+        type: 3}
+      propertyPath: _hitEffect
+      value: 
+      objectReference: {fileID: 780617974, guid: 2547a66872ebe45408ace228820a79e1,
+        type: 3}
     - target: {fileID: 738092616151597510, guid: 65b1cdd79837640448bd8b9b88eed78b,
         type: 3}
       propertyPath: m_LocalPosition.x

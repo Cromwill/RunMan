@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ParticleSystem))]
 public class EffectCicle : MonoBehaviour
 {
     private ParticleSystem _particle;
     private void OnEnable()
     {
-        _particle = GetComponent<ParticleSystem>();
+        _particle = GetComponentInChildren<ParticleSystem>();
         _particle.Play();
         StartCoroutine(DeleteEffect());
   

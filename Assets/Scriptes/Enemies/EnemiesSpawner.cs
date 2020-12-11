@@ -12,7 +12,7 @@ public class EnemiesSpawner : MonoBehaviour, ISearchablePlayers
 
     protected int _enemyCounter;
     protected List<Enemy> _enemiesOnScene;
-    private Player _player;
+    protected Player _player;
 
     protected event Action<Player> _playerFounded;
     private void Start()

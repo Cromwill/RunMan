@@ -2114,8 +2114,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 250
-  _deadEffect: {fileID: 4029307394000726617, guid: 43b758984af4dda47a41a8b5e203ba95,
+  _deadEffect: {fileID: -3406858815362570257, guid: e5df5caad603c8349ba3481b8ded0927,
     type: 3}
+  _hitEffect: {fileID: 780617974, guid: 2547a66872ebe45408ace228820a79e1, type: 3}
   _maxTurnSpeed: 0.25
   _minTurnSpeed: 0.7
   _defualtLife: 1

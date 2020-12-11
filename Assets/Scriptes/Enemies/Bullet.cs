@@ -17,14 +17,16 @@ public class Bullet : Enemy
         {
             Turn(_player.position);
             _selfRigidbody.velocity = transform.forward.normalized * _speed * Time.fixedDeltaTime;
-            //_selfRigidbody.velocity = transform.
         }
     }
 
     protected override void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.GetComponent<Player>() != null && !_isDead)
+        {
+            collision.gameObject.GetComponent<Player>().Dead();
+        }
         Dead();
-        base.OnCollisionEnter(collision);
     }
 
     public override void SetPlayer(Player player)
@@ -37,12 +39,14 @@ public class Bullet : Enemy
     {
         if(_deadEffect != null)
             Instantiate(_deadEffect, transform.position, Quaternion.identity);
-        base.Dead();
         Destroy(gameObject);
+        base.Dead();
+        
     }
 
     private void Turn(Vector3 target)
     {
+        target = new Vector3(target.x, target.y + 1.0f, target.z);
         Vector3 direction = target - transform.position;
         float step = _turnSpeed * Time.fixedDeltaTime;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction.normalized, step, 0.0f);

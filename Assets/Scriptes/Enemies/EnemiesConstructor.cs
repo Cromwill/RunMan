@@ -20,7 +20,7 @@ public class EnemiesConstructor : MonoBehaviour
     {
         _spawnGenerator = new EnemySpawnGenerator(_spawnRect);
         StartCoroutine(GenerateOgre(10));
-        StartCoroutine(GenerateRocket(20));
+        StartCoroutine(GenerateRocket(15));
     }
     public void GenerateEnemeSpawners(ITile[] tiles, ITile currentTile)
     {
