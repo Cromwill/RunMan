@@ -14,6 +14,7 @@ public class PlayerMover : MonoBehaviour, IPlayerComponent
     private float _speed;
     private float _rotationSpeed;
     private Rigidbody _selfRigidbody;
+    private Animator _selfAnimator;
 
     public BoosterType BoosterType => _type;
 
@@ -21,6 +22,7 @@ public class PlayerMover : MonoBehaviour, IPlayerComponent
     {
         _selfRigidbody = GetComponent<Rigidbody>();
         _player = GetComponent<Player>();
+        _selfAnimator = GetComponent<Animator>();
         _rotationSpeed = _currentRotationSpeed;
         _speed = (_maxSpeed + _minSpeed) / 2;
 
