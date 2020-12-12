@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour, IDeadable
     [SerializeField] protected float _minTurnSpeed;
     [SerializeField] protected float _defualtLife;
     [SerializeField] protected float _reactionTime;
+    [SerializeField] protected Achievement[] _achievements;
 
     protected Transform _player;
     protected Rigidbody _selfRigidbody;
@@ -47,6 +48,9 @@ public class Enemy : MonoBehaviour, IDeadable
     public virtual void Dead()
     {
         Deading?.Invoke(this);
+
+        foreach (var achievement in _achievements)
+            achievement.AddValue(1);
     }
 
     public virtual void AddDamage(float damage)

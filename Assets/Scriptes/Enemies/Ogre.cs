@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class Ogre : Enemy, ISearchablePlayers
 {
+    private bool _isStan;
+
     private void Start()
     {
         _selfRigidbody = GetComponent<Rigidbody>();
         _selfAnimator = GetComponent<Animator>();
-        //_selfAnimator.SetBool("Run", true);
         _turnSpeed = _maxTurnSpeed;
     }
 
     private void FixedUpdate()
     {
-        if (_isPlayerFounded)
+        if (_isPlayerFounded && !_isStan)
         {
             Vector3 direction = _isPlayerFounded ? _player.position : transform.forward + new Vector3(10, 0, 0);
 
@@ -64,6 +65,14 @@ public class Ogre : Enemy, ISearchablePlayers
     public override void AddDamage(float damage)
     {
         _selfAnimator.SetTrigger("Roar");
+        _isStan = true;
+        StartCoroutine(ReturnFromStan());
         base.AddDamage(damage);
+    }
+
+    private IEnumerator ReturnFromStan()
+    {
+        yield return new WaitForSeconds(1);
+        _isStan = false;
     }
 }

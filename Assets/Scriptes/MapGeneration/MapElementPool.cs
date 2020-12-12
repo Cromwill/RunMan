@@ -23,12 +23,22 @@ public class MapElementPool : MonoBehaviour
     public IMapElement GetNonDestroyObject(Transform parent)
     {
         IMapElement element = Instantiate(_nonDestroyObjects[Random.Range(0, _nonDestroyObjects.Count)], parent);
+        element.RandomRotate();
         return element;
     }
 
-    public IMapElement GetNonDestroyObject() => _nonDestroyObjects[Random.Range(0, _nonDestroyObjects.Count)];
-
-    public IMapElement GetDestroyObject() => _destroyObjects[Random.Range(0, _destroyObjects.Count)];
+    public IMapElement GetNonDestroyObject()
+    {
+        IMapElement element = _nonDestroyObjects[Random.Range(0, _nonDestroyObjects.Count)];
+        element.RandomRotate();
+        return element;
+    }
+    public IMapElement GetDestroyObject()
+    {
+        IMapElement element = _destroyObjects[Random.Range(0, _destroyObjects.Count)];
+        element.RandomRotate();
+        return element;
+    }
 
     public ITile GetTile()
     {
@@ -77,7 +87,7 @@ public class MapElementPool : MonoBehaviour
 
     private IEnumerator GenerateTileByStep()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForSeconds(20);
         }

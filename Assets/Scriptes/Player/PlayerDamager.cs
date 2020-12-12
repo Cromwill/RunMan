@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerDamager : MonoBehaviour, IPlayerComponent
@@ -10,6 +11,7 @@ public class PlayerDamager : MonoBehaviour, IPlayerComponent
     [SerializeField] private BoosterType _type;
 
     private PlayerDamageZone _damageZone;
+    private Animator _playerAnimator;
 
     public event Action BulletsRunOut;
 
@@ -17,6 +19,7 @@ public class PlayerDamager : MonoBehaviour, IPlayerComponent
 
     private void Start()
     {
+        _playerAnimator = GetComponent<Animator>();
         _damageZone = GetComponentInChildren<PlayerDamageZone>();
         _damageZone.FindedEnemies += Shoot;
         if (_armorViewer != null)
@@ -59,10 +62,17 @@ public class PlayerDamager : MonoBehaviour, IPlayerComponent
     {
         if (_bulletCount > 0)
         {
-            Debug.Log("damage");
             _bulletCount--;
             _armorViewer.Show(_bulletCount);
             enemy.AddDamage(_defaultDamage);
+            _playerAnimator.SetBool("Shoot", true);
+            StartCoroutine(FinishShoot());
         }
+    }
+
+    private IEnumerator FinishShoot()
+    {
+        yield return new WaitForSeconds(0.25f);
+        _playerAnimator.SetBool("Shoot", false);
     }
 }

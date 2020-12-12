@@ -5,6 +5,7 @@ public class ScoreCounter : MonoBehaviour, IPlayerComponent
     [SerializeField] private ScoreTerms _scoreTerms;
     [SerializeField] private ScoreVieweronlevel _scoreViewer;
     [SerializeField] private BoosterType _type;
+    [SerializeField] private Achievement[] _achievements;
 
     private Vector3 _oldPosition;
     private float _scoreMultiplier = 1;
@@ -31,8 +32,17 @@ public class ScoreCounter : MonoBehaviour, IPlayerComponent
     public void DistanceColculate()
     {
         Vector3 currentPosition = PositionColculation(transform.position);
-        distance += Vector3.Distance(currentPosition, _oldPosition);
+        float newDistance = Vector3.Distance(currentPosition, _oldPosition);
+        distance += newDistance;
         _oldPosition = currentPosition;
+
+        foreach(var achievement in _achievements)
+        {
+            if (achievement.IsRecord)
+                achievement.AddValue(distance);
+            else
+                achievement.AddValue(newDistance);
+        }
 
         if (_scoreViewer != null)
             _scoreViewer.ShowDistance(distance);

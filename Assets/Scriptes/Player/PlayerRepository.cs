@@ -9,6 +9,8 @@ public class PlayerRepository : MonoBehaviour
     {
         int id = SaveDataStorage.LoadCurrentRunnersId();
         Debug.Log("id - " + id);
+        if (id == 0) id = 1;
+
         return _skins.Where(a => a.Id == id).FirstOrDefault();
     }
 
