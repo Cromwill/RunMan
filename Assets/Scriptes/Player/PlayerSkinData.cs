@@ -2,7 +2,8 @@
 using System.Reflection;
 using System;
 using System.Linq;
-using Boo.Lang;
+using System.Collections;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "newPlayerSkinData", menuName = "PlayerSckinData")]
 public class PlayerSkinData : ScriptableObject, IBuyableObject
