@@ -13,6 +13,7 @@ public class EnemiesSpawner : MonoBehaviour, ISearchablePlayers
     protected int _enemyCounter;
     protected List<Enemy> _enemiesOnScene;
     protected Player _player;
+    
 
     protected event Action<Player> _playerFounded;
     private void Start()
@@ -34,7 +35,7 @@ public class EnemiesSpawner : MonoBehaviour, ISearchablePlayers
             float randomPositionY = Random.Range(-1.5f, 1.51f);
 
             randomPositionX = Mathf.Sign(randomPositionX) > 0 ? randomPositionX + 1.0f : randomPositionX - 1.0f;
-            randomPositionX = Mathf.Sign(randomPositionY) > 0 ? randomPositionY + 1.0f : randomPositionY - 1.0f;
+            randomPositionY = Mathf.Sign(randomPositionY) > 0 ? randomPositionY + 1.0f : randomPositionY - 1.0f;
 
             Vector3 spawnPoint = new Vector3(randomPositionX, 0, randomPositionY);
             Enemy enemy = Instantiate(_enemies[Random.Range(0, _enemies.Length)], transform.position + spawnPoint, Quaternion.Euler(0, Random.Range(0,360), 0));

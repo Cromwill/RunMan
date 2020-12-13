@@ -1181,8 +1181,8 @@ MonoBehaviour:
   _startOfsetPosition: 2
   _prefab: {fileID: 33347399980157887, guid: 8de5df18c73cc9e4c85561f3c96a1bd3, type: 3}
   _fogRegenirationTime: 4
-  _fogLifeTime: 10
-  _lifeTime: 4
+  _fogLifeTime: 15
+  _lifeTime: 10
 --- !u!114 &677839629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2547,6 +2547,10 @@ PrefabInstance:
     - target: {fileID: 162164, guid: 41f004686382a67468525c4a27865c20, type: 3}
       propertyPath: m_Name
       value: Giftbox_01_Yellow
+      objectReference: {fileID: 0}
+    - target: {fileID: 162164, guid: 41f004686382a67468525c4a27865c20, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 401422, guid: 41f004686382a67468525c4a27865c20, type: 3}
       propertyPath: m_LocalPosition.x

@@ -44,7 +44,7 @@ public class FogConstructor : MonoBehaviour
         foreach (var tile in tiles)
         {
             var fog = Instantiate(_prefab);
-            fog.Initialization(tile, _fogLifeTime, _fogLifeTime);
+            fog.Initialization(tile, _fogLifeTime, _lifeTime);
             tile.AddFog(fog);
         }
     }
