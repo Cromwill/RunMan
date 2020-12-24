@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,12 +21,17 @@ public class ExitPanel : MonoBehaviour
     private float _currentDistance;
     private int _currentMoney;
 
+    public event Action<int> OnExit;
+
     private void Start()
     {
         _back.onClick.AddListener(ClosePanel);
         _exit.onClick.AddListener(Exit);
         _replay.onClick.AddListener(Replay);
         _addMoneyViewer.ConvertToMoneyStarting += delegate { StartCoroutine(DecrieseScore()); };
+
+        var pool = FindObjectOfType<MapElementPool>();
+        pool.SetExitPanel(this);
     }
 
     public void ShowPanel(bool isGameOver) => OpenPanel(isGameOver);
@@ -79,13 +85,13 @@ public class ExitPanel : MonoBehaviour
 
     private void Exit()
     {
+        OnExit?.Invoke(0);
         Time.timeScale = 1;
-        SceneManager.LoadScene(0);
     }
 
     private void Replay()
     {
-        SceneManager.LoadScene(1);
+        OnExit?.Invoke(1);
     }
 
     private void ClosePanel()

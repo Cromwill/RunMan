@@ -27,12 +27,17 @@ public class Fog : MonoBehaviour
         StartCoroutine(DeadZoneActive());
     }
 
+    public void Clear()
+    {
+        StopCoroutine(DestroyTile());
+        StopCoroutine(DeadZoneActive());
+        DestroyFog();
+    }
+
     private IEnumerator DestroyTile()
     {
         yield return new WaitForSeconds(_lifeTime);
-        Destriction?.Invoke(this);
-
-        Destroy(gameObject);
+        DestroyFog();
     }
 
     private IEnumerator DeadZoneActive()
@@ -47,5 +52,11 @@ public class Fog : MonoBehaviour
             {
                 other.gameObject.GetComponent<IDeadable>().Dead();
             }
+    }
+
+    private void DestroyFog()
+    {
+        Destriction?.Invoke(this);
+        Destroy(gameObject);
     }
 }

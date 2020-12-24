@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Boo.Lang;
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TileGeneration : MonoBehaviour, ITile
 {
@@ -10,6 +12,7 @@ public class TileGeneration : MonoBehaviour, ITile
     private Mesh _mesh;
     private MapElementPool _pool;
     private EnemiesSpawner _spawner;
+    private List<IMapElement> _mapElements = new List<IMapElement>();
 
     public bool IsInThePool { get; set; } = true;
     public bool IsHaveSpawner => _spawner != null;
@@ -42,10 +45,14 @@ public class TileGeneration : MonoBehaviour, ITile
     private void Start()
     {
         _mesh = GetComponent<MeshFilter>().mesh;
-        _pool = FindObjectOfType<MapElementPool>();
-        GenerateTile(NotDestroyObjectPositions, MapElementTypes.NotDestroy);
-        GenerateTile(DestroyPositions, MapElementTypes.Destroy);
+
+        CheckPosition = null;
+        ReturningToPool = null;
+        IsHaveFog = false;
     }
+
+    public void GenerateDestroyObjects() => GenerateTile(DestroyPositions, MapElementTypes.Destroy);
+    public void GeneratenonDestroyObjects() => GenerateTile(NotDestroyObjectPositions, MapElementTypes.NotDestroy);
 
     public void SetPosition(Vector3 position) => transform.position = position;
 
@@ -70,15 +77,23 @@ public class TileGeneration : MonoBehaviour, ITile
         if (_spawner != null)
             Destroy(_spawner.gameObject);
         _pool.ReturnToPool(this);
+        ReturningToPool = null;
     }
+
 
     private void GenerateTile(Vector3[] positions, MapElementTypes mapElementTypes)
     {
+
+        if (_pool == null)
+            _pool = FindObjectOfType<MapElementPool>();
+
         for (int i = 0; i < positions.Length; i++)
         {
             IMapElement prefab = mapElementTypes == MapElementTypes.Destroy ? _pool.GetDestroyObject() : _pool.GetNonDestroyObject();
             IMapElement mapElement = Instantiate((MapElement)prefab, transform);
             mapElement.SetElement(GetPosition() + positions[i]);
+            _mapElements.Add(mapElement);
+            DontDestroyOnLoad((mapElement as MapElement).gameObject);
         }
     }
 

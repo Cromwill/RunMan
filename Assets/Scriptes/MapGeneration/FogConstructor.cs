@@ -15,7 +15,7 @@ public class FogConstructor : MonoBehaviour
     private LevelConstructor _levelConstructor;
     private float _fogZPosition;
     private float _fogStep;
-    private List<Vector3> _currentFog;
+    private List<Fog> _currentFog = new List<Fog>();
 
     public void StartGenerate(LevelConstructor levelConstructor, ITile startTile)
     {
@@ -25,6 +25,12 @@ public class FogConstructor : MonoBehaviour
 
         GenerateFog();
         StartCoroutine(NextGnerateFog());
+    }
+
+    public void ClearMap()
+    {
+        foreach (var fog in _currentFog)
+            fog.Clear();
     }
 
     private IEnumerator NextGnerateFog()
@@ -46,6 +52,8 @@ public class FogConstructor : MonoBehaviour
             var fog = Instantiate(_prefab);
             fog.Initialization(tile, _fogLifeTime, _lifeTime);
             tile.AddFog(fog);
+            _currentFog.Add(fog);
+            fog.Destriction += delegate { _currentFog.Remove(fog); };
         }
     }
 }

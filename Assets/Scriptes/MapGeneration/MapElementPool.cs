@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class MapElementPool : MonoBehaviour
@@ -14,12 +15,14 @@ public class MapElementPool : MonoBehaviour
     [SerializeField] private int _startTilesCount;
 
     private ITile[] _tilePool;
-
+    private ExitPanel _exitPanel;
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
         Time.timeScale = 1;
         GeneratePool(_tilesCount);
     }
+
     public IMapElement GetNonDestroyObject(Transform parent)
     {
         IMapElement element = Instantiate(_nonDestroyObjects[Random.Range(0, _nonDestroyObjects.Count)], parent);
@@ -40,6 +43,12 @@ public class MapElementPool : MonoBehaviour
         return element;
     }
 
+    public void SetExitPanel(ExitPanel exit)
+    {
+        _exitPanel = exit;
+        exit.OnExit += ClearMap;
+    }
+
     public ITile GetTile()
     {
         var tilesThatAtPool = _tilePool.Where(t => t.IsInThePool == true).ToArray();
@@ -58,6 +67,25 @@ public class MapElementPool : MonoBehaviour
         return tile;
     }
 
+    public ITile GetTile(Vector3 position)
+    {
+        try
+        {
+            return _tilePool.Where(a => a.GetPosition() == position).First();
+        }
+        catch(Exception ex)
+        {
+            Debug.LogError(ex.Message);
+            Debug.LogError(ex.StackTrace);
+            return null;
+        }
+    }
+
+    public bool IsPositionEmpty(Vector3 position)
+    {
+        return _tilePool.Where(a => a.GetPosition() == position).Count() == 0;
+    }
+
     public void ReturnToPool(ITile tile)
     {
         Vector3 position = transform.position;
@@ -73,23 +101,47 @@ public class MapElementPool : MonoBehaviour
         }
     }
 
+    private void ClearMap(int sceneIndex)
+    {
+        foreach (var tile in _tilePool)
+            ReturnToPool(tile);
+
+        SceneManager.LoadScene(sceneIndex);
+    }
+
     private void GeneratePool(int count)
     {
-        _tilePool = new ITile[count];
-        Vector3 position = transform.position;
-
-        for (int i = 0; i < count; i++)
+        var tiles = FindObjectsOfType<TileGeneration>();
+        
+        if(tiles.Length > 0)
         {
-            _tilePool[i] = Instantiate(_tiles[Random.Range(0, _tiles.Count)]);
-            _tilePool[i].SetPosition(new Vector3(position.x, position.y - i, position.z));
+            _tilePool = tiles;
+        }
+        else
+        {
+            _tilePool = new ITile[count];
+            Vector3 position = transform.position;
+
+            for (int i = 0; i < _tilesCount; i++)
+            {
+                _tilePool[i] = Instantiate(_tiles[Random.Range(0, _tiles.Count)]);
+                _tilePool[i].SetPosition(new Vector3(position.x, position.y - i, position.z));
+                _tilePool[i].GenerateDestroyObjects();
+                _tilePool[i].GeneratenonDestroyObjects();
+
+                DontDestroyOnLoad((_tilePool[i] as TileGeneration).gameObject);
+            }
         }
     }
 
-    private IEnumerator GenerateTileByStep()
+    private IEnumerator GenerateTileByStep(Vector3 position)
     {
-        while (true)
+        for(int i = 0; i < _tilesCount; i++)
         {
-            yield return new WaitForSeconds(20);
+            _tilePool[i] = Instantiate(_tiles[Random.Range(0, _tiles.Count)]);
+            _tilePool[i].SetPosition(new Vector3(position.x, position.y - i, position.z));
+            DontDestroyOnLoad((_tilePool[i] as TileGeneration).gameObject);
+            yield return null;
         }
     }
 }

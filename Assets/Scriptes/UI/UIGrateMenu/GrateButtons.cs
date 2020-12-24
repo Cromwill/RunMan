@@ -12,6 +12,8 @@ public class GrateButtons : MonoBehaviour
     [SerializeField] private Color _selectedColor;
     [SerializeField] private Scrollbar _horizontalScrollbar;
 
+    private AsyncOperation _gameScenePlay;
+
     private void Awake()
     {
         _horizontalScrollbar.onValueChanged.AddListener(ChangeScrollbarValue);
@@ -20,7 +22,6 @@ public class GrateButtons : MonoBehaviour
     public void PlayLevel()
     {
         SceneManager.LoadScene(1);
-        Debug.Log("LevelPlay");
     }
 
     public void ShowGarage()

@@ -19,7 +19,7 @@ public class SkillData : ScriptableObject
     public int GetPrice(int count)
     {
         int index = count == 0 ? 0 : 1;
-        return (int)(Mathf.Pow(_incrementStep, count) - index) * _basePrice;
+        return (int)Mathf.Pow(_incrementStep, count- index) * _basePrice;
     }
 
     public void UseSkill(IPlayerComponent[] components)

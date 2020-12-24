@@ -20,8 +20,6 @@ public class ModelViewer : MonoBehaviour
     {
         _avatar = GetComponentInChildren<PlayerSkins>();
         _selfAnimator = GetComponent<Animator>();
-
-        Debug.Log(_avatar);
     }
 
     public void ToggleActiveObject(bool isShop, ModelSwitcher switcher)

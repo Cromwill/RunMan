@@ -60,10 +60,10 @@ public class PlayerMover : MonoBehaviour, IPlayerComponent
         switch (skill.skillKey)
         {
             case "RunningSpeed":
-                _maxSpeed *= (skill.Multiplier * count);
+                _maxSpeed *= ((skill.Multiplier - 1) * count) + 1;
                 break;
             case "SwingSpeed":
-                _currentRotationSpeed *= (skill.Multiplier * count);
+                _currentRotationSpeed *= ((skill.Multiplier - 1) * count) + 1;
                 break;
         }
     }

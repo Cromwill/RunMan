@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(FogConstructor))]
 public class LevelConstructor : MonoBehaviour
@@ -9,6 +10,7 @@ public class LevelConstructor : MonoBehaviour
     [SerializeField] private int _horizontalRange;
     [SerializeField] private MapElementPool _pool;
     [SerializeField] private GameObject _startTileGameObject;
+    [SerializeField] private ExitPanel _exitPanel;
 
     private ITile _startTile;
     private List<ITile> _currentTiles;
@@ -19,14 +21,22 @@ public class LevelConstructor : MonoBehaviour
     private void OnValidate()
     {
         _startTileGameObject = _startTileGameObject.GetComponent<ITile>() == null ? null : _startTileGameObject;
+        _startTile = _startTileGameObject.GetComponent<ITile>();
+    }
+
+    private void OnDestroy()
+    {
+        _currentTiles.Clear();
+        Debug.Log("Destroy levelConstructor");
     }
 
     private void Start()
     {
-        _startTile = _startTileGameObject != null ? _startTileGameObject.GetComponent<ITile>() : null;
+        Time.timeScale = 1;
         _startTile.CheckPosition += GenerateLevel;
         _currentTiles = new List<ITile>();
         _currentTiles.Add(_startTile);
+        _pool = FindObjectOfType<MapElementPool>();
         _fogConstructor = GetComponent<FogConstructor>();
         _enemiesConstructor = GetComponent<EnemiesConstructor>();
     }
@@ -67,15 +77,47 @@ public class LevelConstructor : MonoBehaviour
         _enemiesConstructor.GenerateEnemeSpawners(_currentTiles.ToArray(), currentTile);
     }
 
+    private void ExitLevel()
+    {
+        foreach(var tile in _currentTiles)
+        {
+            if (!tile.IsHaveFog)
+                _pool.ReturnToPool(tile);
+        }
+    }
+
     private ITile GenerateTile(Vector3 position, bool isFirstTile = false)
     {
-        ITile tile = _pool.GetTile();
-        tile.ReturningToPool += delegate(ITile currentTile)
+        ITile tile;
+
+        if (_pool.IsPositionEmpty(position))
+        {
+            tile = _pool.GetTile();
+            tile.ReturningToPool += delegate (ITile currentTile)
+            {
+                _currentTiles.Remove(currentTile);
+            };
+            tile.SetPosition(position);
+            tile.CheckPosition += GenerateLevel;
+        }
+        else
+        {
+            tile = _pool.GetTile(position);
+            tile.CheckPosition += GenerateLevel;
+            tile.ReturningToPool += delegate (ITile currentTile)
+            {
+                _currentTiles.Remove(currentTile);
+            };
+        }
+        return tile;
+    }
+
+    private void SubscribeOnTileAction(ITile tile)
+    {
+        tile.ReturningToPool += delegate (ITile currentTile)
         {
             _currentTiles.Remove(currentTile);
         };
-        tile.SetPosition(position);
         tile.CheckPosition += GenerateLevel;
-        return tile;
     }
 }

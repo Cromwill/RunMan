@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor.Build.Reporting;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SkillPoints : MonoBehaviour
@@ -26,9 +27,11 @@ public class SkillPoints : MonoBehaviour
     {
         Coast = _skillData.GetPrice((int)_slider.value);
         if (_slider.value < _savedSkillValue)
-            Coast *= -1;
+            Coast = Refund();
         else if (_slider.value == _savedSkillValue)
             Coast = 0;
+        else
+            Coast = GetPrice();
 
         _skills.ShowTotal();
     }
@@ -44,5 +47,28 @@ public class SkillPoints : MonoBehaviour
         SaveDataStorage.SaveSkills(_skillData.skillKey, SkillValue);
         _savedSkillValue = SkillValue;
         ValueChange(0);
+    }
+
+    private int Refund()
+    {
+        int refundSum = 0;
+
+        for(int i = _savedSkillValue; i > SkillValue; i--)
+        {
+            refundSum += _skillData.GetPrice(i);
+        }
+
+        return refundSum * -1;
+    }
+
+    private int GetPrice()
+    {
+        int sum = 0;
+
+        for(int i = 1; i <= SkillValue; i++)
+        {
+            sum += _skillData.GetPrice(i);
+        }
+        return sum;
     }
 }

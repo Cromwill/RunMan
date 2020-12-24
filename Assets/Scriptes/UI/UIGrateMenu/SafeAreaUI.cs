@@ -7,7 +7,5 @@ public class SafeAreaUI : MonoBehaviour
     private void Awake()
     {
         var safeArea = Screen.safeArea;
-
-        Debug.Log("Save area - " + safeArea);
     }
 }
