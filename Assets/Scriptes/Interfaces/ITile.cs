@@ -13,6 +13,7 @@ public interface ITile
     void AddSpawner(EnemiesSpawner spawner);
     void GenerateDestroyObjects();
     void GeneratenonDestroyObjects();
+    void ReturnToPool(Vector3 poolPosition);
 
     event Action<ITile> CheckPosition;
     event Action<ITile> ReturningToPool;

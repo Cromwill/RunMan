@@ -80,6 +80,18 @@ public class TileGeneration : MonoBehaviour, ITile
         ReturningToPool = null;
     }
 
+    public void ReturnToPool(Vector3 poolPosition)
+    {
+        IsHaveFog = false;
+        IsInThePool = true;
+        ReturningToPool?.Invoke(this);
+        ReturningToPool = null;
+        if (_spawner != null)
+            Destroy(_spawner.gameObject);
+
+        SetPosition(poolPosition);
+    }
+
 
     private void GenerateTile(Vector3[] positions, MapElementTypes mapElementTypes)
     {

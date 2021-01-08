@@ -51,7 +51,7 @@ MonoBehaviour:
   _deadEffect: {fileID: 8288181568038308815, guid: 779aa8c25fbd0e1488637639c9fff976,
     type: 3}
   _hitEffect: {fileID: 0}
-  _maxTurnSpeed: 2
+  _maxTurnSpeed: 0.25
   _minTurnSpeed: 0
   _defualtLife: 1
   _reactionTime: 0

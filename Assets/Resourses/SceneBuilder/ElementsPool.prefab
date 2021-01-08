@@ -72,7 +72,7 @@ MonoBehaviour:
   - {fileID: 6721770358429916732, guid: 0a97ea63921bb31419bab3c3a52c8097, type: 3}
   - {fileID: 4084980649226866035, guid: f032eedf8e956ef46afe651910d15e47, type: 3}
   - {fileID: 4972191656299548678, guid: 057453778985a7a4ba8b9762885230a9, type: 3}
-  _tilesCount: 250
+  _tilesCount: 500
   _startTilesCount: 0
 --- !u!114 &1554726141233051635
 MonoBehaviour:

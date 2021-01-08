@@ -11,6 +11,8 @@ public class FogConstructor : MonoBehaviour
     [SerializeField] private float _fogRegenirationTime;
     [SerializeField] private float _fogLifeTime;
     [SerializeField] private float _lifeTime;
+    
+    private FogPool _pool;
 
     private LevelConstructor _levelConstructor;
     private float _fogZPosition;
@@ -22,15 +24,10 @@ public class FogConstructor : MonoBehaviour
         _levelConstructor = levelConstructor;
         _fogZPosition = startTile.GetPosition().z - startTile.GetSize().z * _startOfsetPosition;
         _fogStep = startTile.GetSize().z;
+        _pool = FindObjectOfType<FogPool>();
 
         GenerateFog();
         StartCoroutine(NextGnerateFog());
-    }
-
-    public void ClearMap()
-    {
-        foreach (var fog in _currentFog)
-            fog.Clear();
     }
 
     private IEnumerator NextGnerateFog()
@@ -49,11 +46,12 @@ public class FogConstructor : MonoBehaviour
 
         foreach (var tile in tiles)
         {
-            var fog = Instantiate(_prefab);
+            var fog = _pool.GetFog();
             fog.Initialization(tile, _fogLifeTime, _lifeTime);
             tile.AddFog(fog);
             _currentFog.Add(fog);
             fog.Destriction += delegate { _currentFog.Remove(fog); };
+            fog.Destriction += delegate { _pool.ReturnToPool(fog); };
         }
     }
 }

@@ -41,8 +41,6 @@ public class ModelViewer : MonoBehaviour
             _avatar.SetSkin(_skins.Where(a => a.Id == _currentIdSkin).First());
             ChangePrice();
         }
-
-
     }
 
     public void SetNextAvatar(int direction)
@@ -50,7 +48,6 @@ public class ModelViewer : MonoBehaviour
         _selfAnimator.SetInteger("Direction", direction);
         _selfAnimator.Play("ChangeAvatar");
     }
-
 
     public void ChengeAvatar()
     {

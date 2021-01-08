@@ -16,6 +16,7 @@ public class MapElementPool : MonoBehaviour
 
     private ITile[] _tilePool;
     private ExitPanel _exitPanel;
+    private LoadGameViewer _loadViewer;
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -94,9 +95,7 @@ public class MapElementPool : MonoBehaviour
         {
             if (_tilePool[i] == tile)
             {
-                position = new Vector3(position.x, position.y - i, position.z);
-                _tilePool[i].SetPosition(position);
-                _tilePool[i].IsInThePool = true;
+                _tilePool[i].ReturnToPool(new Vector3(position.x, position.y - i, position.z));
             }
         }
     }

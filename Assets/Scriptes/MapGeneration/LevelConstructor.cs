@@ -10,7 +10,6 @@ public class LevelConstructor : MonoBehaviour
     [SerializeField] private int _horizontalRange;
     [SerializeField] private MapElementPool _pool;
     [SerializeField] private GameObject _startTileGameObject;
-    [SerializeField] private ExitPanel _exitPanel;
 
     private ITile _startTile;
     private List<ITile> _currentTiles;
@@ -27,7 +26,6 @@ public class LevelConstructor : MonoBehaviour
     private void OnDestroy()
     {
         _currentTiles.Clear();
-        Debug.Log("Destroy levelConstructor");
     }
 
     private void Start()

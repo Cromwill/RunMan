@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Fog : MonoBehaviour
 {
-
     private float _lifeTime;
     private float _saveTime;
     private ITile _tile;
     private ParticleSystem _particle;
     private Collider _selfColider;
+
+    public bool IsInThePool { get; set; } = true;
 
     public event Action<Fog> Destriction;
 
@@ -23,6 +24,7 @@ public class Fog : MonoBehaviour
         _lifeTime = lifeTime;
         _saveTime = saveTime;
         _particle.Play();
+        IsInThePool = false;
         StartCoroutine(DestroyTile());
         StartCoroutine(DeadZoneActive());
     }
@@ -33,6 +35,8 @@ public class Fog : MonoBehaviour
         StopCoroutine(DeadZoneActive());
         DestroyFog();
     }
+
+    public void SetPosition(Vector3 position) => transform.position = position;
 
     private IEnumerator DestroyTile()
     {
@@ -57,6 +61,8 @@ public class Fog : MonoBehaviour
     private void DestroyFog()
     {
         Destriction?.Invoke(this);
-        Destroy(gameObject);
+        IsInThePool = true;
+        _particle.Stop();
+        _particle.Clear();
     }
 }

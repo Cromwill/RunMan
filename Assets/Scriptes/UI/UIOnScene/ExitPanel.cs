@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ExitPanel : MonoBehaviour
@@ -31,7 +30,10 @@ public class ExitPanel : MonoBehaviour
         _addMoneyViewer.ConvertToMoneyStarting += delegate { StartCoroutine(DecrieseScore()); };
 
         var pool = FindObjectOfType<MapElementPool>();
+        var fogPool = FindObjectOfType<FogPool>();
+
         pool.SetExitPanel(this);
+        fogPool.SetExitPanel(this);
     }
 
     public void ShowPanel(bool isGameOver) => OpenPanel(isGameOver);
