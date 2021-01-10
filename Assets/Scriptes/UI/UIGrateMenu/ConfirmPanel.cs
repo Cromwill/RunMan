@@ -23,14 +23,10 @@ public class ConfirmPanel : MonoBehaviour
         gameObject.SetActive(true);
         if (_selfAnimator == null)
             _selfAnimator = GetComponent<Animator>();
-
-
-        _itemViewer.sprite = item.GetItemViewer;
-        _itemName.text = item.GetItemName;
-        _itemDescription.text = item.GetItemDescription;
-        _currencyType.sprite = _currencyTypes[(int)item.CurrencyType];
-        _price.text = (item as IBuyableObject).Price.ToString("0.##");
+        
+        ShowItemInformation(item);    
         _currentItem = item;
+
         Sprite currentButtonSprite = SaveDataStorage.ItemContain(item) ? _buyButtonImage[1] : _buyButtonImage[0];
         _confirmButton.GetComponent<Image>().sprite = currentButtonSprite;
         SetConfirmButtonInteractable();
@@ -53,11 +49,20 @@ public class ConfirmPanel : MonoBehaviour
         }
         else if (_scoreCounter.ReduceScore(GetItemScore(_currentItem)))
         {
-            _scoreCounter.SaveBuyableObject(_currentItem as IBuyableObject); // не забыть поправить
+            _scoreCounter.SaveBuyableObject(_currentItem as IBuyableObject);
             _confirmButton.GetComponent<Image>().sprite = _buyButtonImage[1];
             _selfAnimator.Play("Success");
             SetConfirmButtonInteractable();
         }
+    }
+
+    private void ShowItemInformation(IItem item)
+    {
+        _itemViewer.sprite = item.ItemPicture;
+        _itemName.text = item.GetItemName;
+        _itemDescription.text = item.GetItemDescription;
+        _currencyType.sprite = (item as Booster).CurrencyPicture;
+        _price.text = (item as IBuyableObject).Price.ToString("0.##");
     }
 
     private Score GetItemScore(IItem item)
@@ -67,10 +72,4 @@ public class ConfirmPanel : MonoBehaviour
     }
 
     private void SetConfirmButtonInteractable() => _confirmButton.interactable = !SaveDataStorage.ItemContain(_currentItem);
-}
-
-public enum CurrencyType
-{
-    Money = 0,
-    Coin = 1
 }

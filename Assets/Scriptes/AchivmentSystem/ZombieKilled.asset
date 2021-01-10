@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 2
   _name: ZombieKilled
+  _showName: Zombie Killed
   _description: 
   _isRecord: 0
   _conditions:
@@ -27,3 +28,4 @@ MonoBehaviour:
   - 1000
   - 5000
   - 10000
+  _rewardIndex: 10

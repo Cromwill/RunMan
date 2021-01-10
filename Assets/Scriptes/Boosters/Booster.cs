@@ -10,13 +10,15 @@ public class Booster : ScriptableObject, IItem, IBuyableObject
     [SerializeField] private string _descriptions;
     [SerializeField] private string _itemName;
     [SerializeField] private CurrencyType _currencyType;
-    [SerializeField] private Sprite _itemViewer;
+    [SerializeField] private Sprite _itemPicture;
+    [SerializeField] private Sprite _currencyPicture;
     [SerializeField] private ItemType _itemType;
 
     public BoosterType Type => _boosterType;
     public float Value => _changingValue;
     public float GetItemPrice => _price;
-    public Sprite GetItemViewer => _itemViewer;
+    public Sprite ItemPicture => _itemPicture;
+    public Sprite CurrencyPicture => _currencyPicture;
     public string GetItemName => _itemName;
     public string GetItemDescription => _descriptions;
     public CurrencyType CurrencyType => _currencyType;
@@ -33,5 +35,14 @@ public enum BoosterType
     Item,
     Score,
     Life,
-    Coin
+    Coin,
+    Money
+}
+
+public enum CurrencyType
+{
+    Money = 0,
+    Coin = 1,
+    Comertial,
+    Real
 }

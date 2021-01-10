@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 1
   _name: DistanceCoveredForLevel
+  _showName: Distance Covered For Level
   _description: 
   _isRecord: 1
   _conditions:
@@ -27,3 +28,4 @@ MonoBehaviour:
   - 20000
   - 30000
   - 50000
+  _rewardIndex: 2

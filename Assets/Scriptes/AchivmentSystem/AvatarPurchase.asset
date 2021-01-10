@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 6
   _name: AvatarPurchase
+  _showName: Avatar Purchase
   _description: 
   _isRecord: 0
   _conditions:
@@ -27,3 +28,4 @@ MonoBehaviour:
   - 8
   - 9
   - 10
+  _rewardIndex: 100

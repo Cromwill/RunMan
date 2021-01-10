@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 7
   _name: SkillsPurchase
+  _showName: Skills Purchase
   _description: 
   _isRecord: 0
   _conditions:
@@ -27,3 +28,4 @@ MonoBehaviour:
   - 30
   - 35
   - 40
+  _rewardIndex: 20

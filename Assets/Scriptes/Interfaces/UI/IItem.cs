@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 public interface IItem
 {
-    Sprite GetItemViewer { get; }
+    Sprite ItemPicture { get; }
     string GetItemName { get; }
     string GetItemDescription { get; }
     CurrencyType CurrencyType { get; }

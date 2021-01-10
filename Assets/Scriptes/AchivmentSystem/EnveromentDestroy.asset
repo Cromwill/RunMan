@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 5
   _name: EnveromentDestroy
+  _showName: Enveroment Destroy
   _description: 
   _isRecord: 0
   _conditions:
@@ -27,3 +28,4 @@ MonoBehaviour:
   - 7500
   - 12500
   - 20000
+  _rewardIndex: 2

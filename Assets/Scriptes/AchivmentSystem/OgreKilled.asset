@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 3
   _name: OgreKilled
+  _showName: Ogre Killed
   _description: 
   _isRecord: 0
   _conditions:
@@ -27,3 +28,4 @@ MonoBehaviour:
   - 100
   - 500
   - 1000
+  _rewardIndex: 20
