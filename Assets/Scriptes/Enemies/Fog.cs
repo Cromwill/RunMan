@@ -6,7 +6,7 @@ public class Fog : MonoBehaviour
 {
     private float _lifeTime;
     private float _saveTime;
-    private ITile _tile;
+    private TileGeneration _tile;
     private ParticleSystem _particle;
     private Collider _selfColider;
 
@@ -14,7 +14,7 @@ public class Fog : MonoBehaviour
 
     public event Action<Fog> Destriction;
 
-    public void Initialization(ITile tile, float lifeTime, float saveTime)
+    public void Initialization(TileGeneration tile, float lifeTime, float saveTime)
     {
         _tile = tile;
         Vector3 position = tile.GetPosition();

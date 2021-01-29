@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1554726141233051632}
   - component: {fileID: 1554726141233051633}
   - component: {fileID: 1554726141233051635}
+  - component: {fileID: 1545123657}
   m_Layer: 0
   m_Name: ElementsPool
   m_TagString: Untagged
@@ -99,3 +100,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9750cb4523ad6d640b86cdcbe162ee85, type: 2}
   - {fileID: 11400000, guid: 7a63692566542b240a7aebe8c939c015, type: 2}
   - {fileID: 11400000, guid: 2d3fc47f55e8deb4f96cd461cf1314bd, type: 2}
+--- !u!114 &1545123657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554726141233051638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f57ee5e910253244b876afe1fc5f2164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fogPrefab: {fileID: 33347399980157887, guid: 8de5df18c73cc9e4c85561f3c96a1bd3,
+    type: 3}
+  _startCount: 50
+  _poolPosition: {x: 50, y: -15, z: 0}

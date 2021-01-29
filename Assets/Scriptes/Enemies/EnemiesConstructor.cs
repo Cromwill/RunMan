@@ -10,9 +10,6 @@ public class EnemiesConstructor : MonoBehaviour
     [SerializeField] private Enemy _ogre;
     [SerializeField] private EnemiesSpawner _rocket;
 
-    private bool _isOgreGenerateStarted;
-    private bool _isRocketGenerateStarted;
-
     private List<SpawnDotData> _currentSpawners = new List<SpawnDotData>();
     private IEnemySpawnGenerator _spawnGenerator;
 
@@ -22,7 +19,7 @@ public class EnemiesConstructor : MonoBehaviour
         StartCoroutine(GenerateOgre(10));
         StartCoroutine(GenerateRocket(15));
     }
-    public void GenerateEnemeSpawners(ITile[] tiles, ITile currentTile)
+    public void GenerateEnemeSpawners(TileGeneration[] tiles, TileGeneration currentTile)
     {
         if (_spawnGenerator == null)
             _spawnGenerator = new EnemySpawnGenerator(_spawnRect);
@@ -43,7 +40,7 @@ public class EnemiesConstructor : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(time);
-            ITile tile = _spawnGenerator.GetTileForEnemy();
+            TileGeneration tile = _spawnGenerator.GetTileForEnemy();
             Vector3 spawnPosition = tile.GetPosition();
             spawnPosition.y += 2.2f;
             Instantiate(_ogre, spawnPosition, Quaternion.Euler(0, Random.Range(0, 360), 0));
@@ -55,32 +52,30 @@ public class EnemiesConstructor : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(time);
-            ITile tile = _spawnGenerator.GetTileForEnemy();
+            TileGeneration tile = _spawnGenerator.GetTileForEnemy();
             Vector3 spawnPosition = tile.GetPosition();
             spawnPosition.y += 0.5f;
             Instantiate(_rocket, spawnPosition, Quaternion.identity);
         }
     }
 
-    private void SetSpawnerOnScene(ITile tile)
+    private void SetSpawnerOnScene(TileGeneration tile)
     {
         SpawnDotData spawner = new SpawnDotData(tile);
         spawner.Spawner = Instantiate(_spawner, tile.GetPosition(), Quaternion.identity);
         spawner.SetConnectionWithTile();
         _currentSpawners.Add(spawner);
     }
-
-
 }
 
 public class SpawnDotData
 {
-    public ITile Tile;
+    public TileGeneration Tile;
     public EnemiesSpawner Spawner;
 
     public Vector3 tilePosition => Tile.GetPosition();
 
-    public SpawnDotData(ITile tile)
+    public SpawnDotData(TileGeneration tile)
     {
         Tile = tile;
     }

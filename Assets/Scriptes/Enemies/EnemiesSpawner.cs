@@ -9,16 +9,18 @@ public class EnemiesSpawner : MonoBehaviour, ISearchablePlayers
     [SerializeField] protected int _maxEnemiesCount;
     [SerializeField] protected Enemy[] _enemies;
     [SerializeField] protected float _spawnTime;
+    [SerializeField] protected float _distanceForDestroy;
 
     protected int _enemyCounter;
     protected List<Enemy> _enemiesOnScene;
     protected Player _player;
     
-
     protected event Action<Player> _playerFounded;
+    public event Action DestringSpawner;
     private void Start()
     {
         _enemiesOnScene = new List<Enemy>();
+        _player = FindObjectOfType<Player>();
         StartCoroutine(SpawnEnemy());
     }
 
@@ -43,5 +45,31 @@ public class EnemiesSpawner : MonoBehaviour, ISearchablePlayers
             _enemyCounter++;
             yield return new WaitForSeconds(_spawnTime);
         }
+
+        StartCoroutine(DestroySpawner());
+    }
+
+    private IEnumerator DestroySpawner()
+    {
+        while(!IsPlayerTooFar())
+        {
+
+            yield return new WaitForSeconds(2);
+        }
+
+        DestringSpawner?.Invoke();
+        Destroy(this.gameObject);
+    }
+
+    private bool IsPlayerTooFar()
+    {
+        if (_player == null)
+            _player = FindObjectOfType<Player>();
+
+        float playerPosition = Mathf.Abs(_player.transform.position.z);
+        float spawnerPosition = Mathf.Abs(transform.position.z);
+        float delta = playerPosition - spawnerPosition;
+
+        return delta >= _distanceForDestroy;
     }
 }

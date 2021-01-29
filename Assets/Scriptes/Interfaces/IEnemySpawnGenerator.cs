@@ -2,7 +2,7 @@
 
 public interface IEnemySpawnGenerator
 {
-    ITile[] GetTilesToSpawn(ITile[] tiles, ITile currentTile);
-    ITile GetTileForEnemy();
+    TileGeneration[] GetTilesToSpawn(TileGeneration[] tiles, TileGeneration currentTile);
+    TileGeneration GetTileForEnemy();
 
 }

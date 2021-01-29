@@ -9,8 +9,8 @@ public class EnemySpawnGenerator : IEnemySpawnGenerator
 {
     private Vector3 _spawnRect;
     private List<SpawnerRange> _tilesWithSpawner;
-    private ITile[] _currentTiles;
-    private ITile _currentTile;
+    private TileGeneration[] _currentTiles;
+    private TileGeneration _currentTile;
     private int _stepX;
     private int _stepZ;
 
@@ -22,12 +22,12 @@ public class EnemySpawnGenerator : IEnemySpawnGenerator
         _stepZ = (int)_spawnRect.z + 1;
     }
 
-    public ITile[] GetTilesToSpawn(ITile[] tiles, ITile currentTile)
+    public TileGeneration[] GetTilesToSpawn(TileGeneration[] tiles, TileGeneration currentTile)
     {
         CheckTilesOnScene(tiles);
         _currentTile = currentTile;
         Vector3 size = _currentTile.GetSize();
-        List<ITile> tilesToSpawn = new List<ITile>();
+        List<TileGeneration> tilesToSpawn = new List<TileGeneration>();
         _currentTiles = tiles;
 
         Vector3 startTile = _currentTile.GetPosition() + new Vector3(0, 0, _stepZ * size.z);
@@ -57,7 +57,7 @@ public class EnemySpawnGenerator : IEnemySpawnGenerator
             tilesCounter++;
         }
 
-        tilesToSpawn = new List<ITile>();
+        tilesToSpawn = new List<TileGeneration>();
 
         for (int i = 0; i < centralTiles.Length; i++)
         {
@@ -86,15 +86,15 @@ public class EnemySpawnGenerator : IEnemySpawnGenerator
         return tilesToSpawn.ToArray();
     }
 
-    public ITile GetTileForEnemy()
+    public TileGeneration GetTileForEnemy()
     {
-        ITile[] tiles = _currentTiles.Where(a => CheckEnemyPosition(a.GetPosition(), _stepZ * 2, _stepX) && !a.IsHaveSpawner).ToArray();
+        TileGeneration[] tiles = _currentTiles.Where(a => CheckEnemyPosition(a.GetPosition(), _stepZ * 2, _stepX) && !a.IsHaveSpawner).ToArray();
 
         return tiles[Random.Range(0, tiles.Length)];
     }
 
 
-    private void CheckTilesOnScene(ITile[] tiles)
+    private void CheckTilesOnScene(TileGeneration[] tiles)
     {
         List<SpawnerRange> removeList = new List<SpawnerRange>();
         if (_tilesWithSpawner != null)
@@ -122,9 +122,9 @@ public class EnemySpawnGenerator : IEnemySpawnGenerator
         return check;
     }
 
-    private void CheckSpawnsOnSceene(ref List<ITile> tiles)
+    private void CheckSpawnsOnSceene(ref List<TileGeneration> tiles)
     {
-        List<ITile> removeList = new List<ITile>();
+        List<TileGeneration> removeList = new List<TileGeneration>();
         foreach(var tileOnScene in _tilesWithSpawner)
         {
             foreach(var tileToSpawn in tiles)
@@ -140,9 +140,9 @@ public class EnemySpawnGenerator : IEnemySpawnGenerator
             tiles.Remove(tile);
     }
 
-    private bool AddTileByCoordinates(Vector3 position, ref List<ITile> tiles)
+    private bool AddTileByCoordinates(Vector3 position, ref List<TileGeneration> tiles)
     {
-        ITile tile = _currentTiles.Where(a => a.GetPosition() == position).FirstOrDefault();
+        TileGeneration tile = _currentTiles.Where(a => a.GetPosition() == position).FirstOrDefault();
         if (tile != null)
             tiles.Add(tile);
 

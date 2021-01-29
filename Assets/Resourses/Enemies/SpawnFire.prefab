@@ -49,7 +49,7 @@ Light:
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -82,7 +82,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -302,6 +302,7 @@ MonoBehaviour:
   - {fileID: 4700250605565317569, guid: c8bad1a35af54ad479d0877dd461b270, type: 3}
   - {fileID: 8968226199910083632, guid: aeac107dd1a90374aaf81796674abf79, type: 3}
   _spawnTime: 0.1
+  _distanceForDestroy: 40
 --- !u!1 &5709601181040366040
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,7 +903,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -1167,7 +1168,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5657,7 +5658,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 15
     size3D: 0
     rotation3D: 0
     gravityModifier:

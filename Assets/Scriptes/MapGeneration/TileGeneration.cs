@@ -1,9 +1,9 @@
-﻿using Boo.Lang;
+﻿using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TileGeneration : MonoBehaviour, ITile
+public class TileGeneration : MonoBehaviour
 {
     public Vector3[] NotDestroyObjectPositions;
     public Vector3[] DestroyPositions;
@@ -17,8 +17,8 @@ public class TileGeneration : MonoBehaviour, ITile
     public bool IsInThePool { get; set; } = true;
     public bool IsHaveSpawner => _spawner != null;
     public bool IsHaveFog { get; private set; }
-    public event Action<ITile> CheckPosition;
-    public event Action<ITile> ReturningToPool;
+    public event Action<TileGeneration> CheckPosition;
+    public event Action<TileGeneration> ReturningToPool;
 
     private void OnDrawGizmosSelected()
     {
@@ -58,7 +58,13 @@ public class TileGeneration : MonoBehaviour, ITile
 
     public Vector3 GetPosition() => transform.position;
 
-    public Vector3 GetSize() => _mesh.bounds.size;
+    public Vector3 GetSize()
+    {
+        if(_mesh == null)
+            _mesh = GetComponent<MeshFilter>().mesh;
+
+        return _mesh.bounds.size;
+    }
 
     public void AddFog(Fog fog)
     {
@@ -66,7 +72,13 @@ public class TileGeneration : MonoBehaviour, ITile
         fog.Destriction += ReturnToPool;
     }
 
-    public void AddSpawner(EnemiesSpawner spawner) => _spawner = spawner;
+    public void AddSpawner(EnemiesSpawner spawner)
+    {
+        _spawner = spawner;
+        _spawner.DestringSpawner += RemoveSpawner;
+    }
+
+    private void RemoveSpawner() => _spawner = null;
 
     private void ReturnToPool(Fog fog)
     {

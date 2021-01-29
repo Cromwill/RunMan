@@ -19,7 +19,7 @@ public class FogConstructor : MonoBehaviour
     private float _fogStep;
     private List<Fog> _currentFog = new List<Fog>();
 
-    public void StartGenerate(LevelConstructor levelConstructor, ITile startTile)
+    public void StartGenerate(LevelConstructor levelConstructor, TileGeneration startTile)
     {
         _levelConstructor = levelConstructor;
         _fogZPosition = startTile.GetPosition().z - startTile.GetSize().z * _startOfsetPosition;

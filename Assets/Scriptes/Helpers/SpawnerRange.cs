@@ -8,8 +8,8 @@ public class SpawnerRange
     private Vector3 _minPosition;
     private Vector3 _maxPosition;
 
-    public ITile getTile { get; }
-    public SpawnerRange(ITile tile, int stepX, int stepZ)
+    public TileGeneration getTile { get; }
+    public SpawnerRange(TileGeneration tile, int stepX, int stepZ)
     {
         getTile = tile;
         _stepX = stepX;

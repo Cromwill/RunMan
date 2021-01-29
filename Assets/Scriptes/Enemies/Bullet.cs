@@ -22,9 +22,18 @@ public class Bullet : Enemy
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<Player>() != null && !_isDead)
+        if (collision.gameObject.GetComponent<Player>() != null || 
+            collision.gameObject.GetComponent<Enemy>() != null && !_isDead)
         {
-            collision.gameObject.GetComponent<Player>().Dead();
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, 2.0f, transform.forward);
+
+            foreach(var hit in hits)
+            {
+                if (hit.collider.GetComponent<Player>() != null)
+                    hit.collider.GetComponent<Player>().Dead();
+                else if (hit.collider.GetComponent<Enemy>() != null)
+                    hit.collider.GetComponent<Enemy>().AddDamage(10);
+            }
         }
         Dead();
     }
