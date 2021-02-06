@@ -62,7 +62,10 @@ public class Fog : MonoBehaviour
     {
         Destriction?.Invoke(this);
         IsInThePool = true;
-        _particle.Stop();
-        _particle.Clear();
+        if (_particle != null)
+        {
+            _particle.Stop();
+            _particle.Clear();
+        }
     }
 }

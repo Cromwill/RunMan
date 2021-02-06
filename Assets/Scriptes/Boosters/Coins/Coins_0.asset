@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _boosterType: 5
   _changingValue: 1
-  _price: 10
+  _price: 50
   _descriptions: Coins
   _itemName: Coins
   _currencyType: 0

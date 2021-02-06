@@ -13,6 +13,7 @@ public class Booster : ScriptableObject, IItem, IBuyableObject
     [SerializeField] private Sprite _itemPicture;
     [SerializeField] private Sprite _currencyPicture;
     [SerializeField] private ItemType _itemType;
+    [SerializeField] private string _iOSShopIds;
 
     public BoosterType Type => _boosterType;
     public float Value => _changingValue;
@@ -25,7 +26,19 @@ public class Booster : ScriptableObject, IItem, IBuyableObject
     public ItemType ItemType => _itemType;
     public float Price => _price;
     public int Id => 0;
+    public string ItemIOSId => _iOSShopIds;
+
     string IBuyableObject.Type => _boosterType.ToString();
+
+    public void SaveBooster()
+    {
+        SaveDataStorage.SaveBuyableObject(this);
+    }
+
+    public void DeleteBooster()
+    {
+        SaveDataStorage.SaveBuyableObject(this, false);
+    }
 }
 
 public enum BoosterType

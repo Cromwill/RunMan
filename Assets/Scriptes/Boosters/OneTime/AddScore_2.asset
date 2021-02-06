@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _boosterType: 3
   _changingValue: 4
-  _price: 1000
+  _price: 250
   _descriptions: Add score
   _itemName: Score++
   _currencyType: 0

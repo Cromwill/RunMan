@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour, IDeadable
     [SerializeField] protected float _minTurnSpeed;
     [SerializeField] protected float _defualtLife;
     [SerializeField] protected float _reactionTime;
+    [SerializeField] protected int _damage;
     [SerializeField] protected Achievement[] _achievements;
 
     protected Transform _player;
@@ -35,7 +36,7 @@ public class Enemy : MonoBehaviour, IDeadable
     {
         if (collision.gameObject.GetComponent<Player>() != null && !_isDead)
         {
-            collision.gameObject.GetComponent<Player>().Dead();
+            collision.gameObject.GetComponent<Player>().AddDamage(_damage);
         }
     }
 

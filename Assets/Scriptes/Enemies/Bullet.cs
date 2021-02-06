@@ -30,9 +30,9 @@ public class Bullet : Enemy
             foreach(var hit in hits)
             {
                 if (hit.collider.GetComponent<Player>() != null)
-                    hit.collider.GetComponent<Player>().Dead();
+                    hit.collider.GetComponent<Player>().AddDamage(_damage);
                 else if (hit.collider.GetComponent<Enemy>() != null)
-                    hit.collider.GetComponent<Enemy>().AddDamage(10);
+                    hit.collider.GetComponent<Enemy>().AddDamage(_damage);
             }
         }
         Dead();

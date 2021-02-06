@@ -47,9 +47,13 @@ public class ConfirmPanel : MonoBehaviour
                 _selfAnimator.Play("Success");
             }
         }
+        else if(booster != null && booster.CurrencyType == CurrencyType.Real)
+        {
+            _scoreCounter.BuyMoney(booster);
+        }
         else if (_scoreCounter.ReduceScore(GetItemScore(_currentItem)))
         {
-            _scoreCounter.SaveBuyableObject(_currentItem as IBuyableObject);
+            booster.SaveBooster();
             _confirmButton.GetComponent<Image>().sprite = _buyButtonImage[1];
             _selfAnimator.Play("Success");
             SetConfirmButtonInteractable();

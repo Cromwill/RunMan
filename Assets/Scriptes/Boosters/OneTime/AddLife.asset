@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _boosterType: 4
   _changingValue: 1
-  _price: 200
+  _price: 300
   _descriptions: add life
   _itemName: Life
   _currencyType: 0

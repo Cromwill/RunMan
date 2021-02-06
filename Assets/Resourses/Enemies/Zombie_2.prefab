@@ -19,6 +19,8 @@ MonoBehaviour:
   _minTurnSpeed: 0
   _defualtLife: 0
   _reactionTime: 0
+  _damage: 0
+  _achievements: []
 --- !u!1001 &1232274228877187039
 PrefabInstance:
   m_ObjectHideFlags: 0

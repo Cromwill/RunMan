@@ -500,6 +500,7 @@ MonoBehaviour:
   _minTurnSpeed: 0
   _defualtLife: 3
   _reactionTime: 0
+  _damage: 1
   _achievements:
   - {fileID: 11400000, guid: f11cf0ecbc0c87b4e838faab062f15ab, type: 2}
 --- !u!1 &4179088840770825066

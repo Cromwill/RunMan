@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class SaveDataStorage
 {
-    public static void SaveBuyableObject(IBuyableObject buyable)
+    public static void SaveBuyableObject(IBuyableObject buyable, bool isInInventory = true)
     {
         if (buyable.Type == "avatar")
         {
@@ -13,7 +13,7 @@ public static class SaveDataStorage
         }
         else
         {
-            SaveItem(buyable as IItem, true);
+            SaveItem(buyable as IItem, isInInventory);
         }
         PlayerPrefs.Save();
     }

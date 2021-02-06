@@ -26,7 +26,7 @@ public class PlayerDamager : MonoBehaviour, IPlayerComponent
             _armorViewer.Show(_bulletCount);
     }
 
-    public void Initialization(params Booster[] boosters)
+    public void Initialization(Action<string> action, params Booster[] boosters)
     {
         if (boosters != null)
         {

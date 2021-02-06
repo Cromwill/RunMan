@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _boosterType: 2
   _changingValue: 0
-  _price: 500
+  _price: 2000
   _descriptions: ReductionOfDangerZone
   _itemName: DangerZone
   _currencyType: 0

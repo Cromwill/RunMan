@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
 public class ShopCollections : PanelActivator

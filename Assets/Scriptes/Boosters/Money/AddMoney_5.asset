@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: AddMoney_5
   m_EditorClassIdentifier: 
   _boosterType: 6
-  _changingValue: 1000
-  _price: 5
+  _changingValue: 25000
+  _price: 19.99
   _descriptions: something
   _itemName: AddMoney_5
   _currencyType: 3
   _itemPicture: {fileID: 21300000, guid: 6da8af5f3917d2b44a12d9301321b081, type: 3}
   _currencyPicture: {fileID: 21300000, guid: 32beffcd6d3d5934db6b5296afa4ba7c, type: 3}
   _itemType: 1
+  _iOSShopIds: cash_25000

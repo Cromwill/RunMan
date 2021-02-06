@@ -12,14 +12,20 @@ public class SkillData : ScriptableObject
 
     [SerializeField] private string _saveKey;
     [SerializeField] private float _multiplier;
+    [SerializeField] private int[] _prices;
 
     public string skillKey => _saveKey;
     public float Multiplier => _multiplier;
 
     public int GetPrice(int count)
     {
-        int index = count == 0 ? 0 : 1;
-        return (int)Mathf.Pow(_incrementStep, count- index) * _basePrice;
+        if (count >= 0 && count < _prices.Length)
+            return _prices[count];
+        else
+        {
+            Debug.LogError("Count more then prices length");
+            return 0;
+        }
     }
 
     public void UseSkill(IPlayerComponent[] components)

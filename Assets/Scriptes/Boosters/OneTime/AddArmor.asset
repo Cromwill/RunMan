@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AddArmor
   m_EditorClassIdentifier: 
   _boosterType: 4
-  _changingValue: 3
-  _price: 100
+  _changingValue: 1
+  _price: 150
   _descriptions: something
   _itemName: Armor
   _currencyType: 0

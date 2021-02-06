@@ -12,7 +12,6 @@ public class FogPool : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Generate fog - start");
         _fogPool = null;
         GeneratePool(_startCount);
     }
@@ -53,7 +52,6 @@ public class FogPool : MonoBehaviour
 
     private void GeneratePool(int count)
     {
-        Debug.Log("Generate fog");
         var fogs = FindObjectsOfType<Fog>();
 
         if (fogs.Length > 0)
@@ -61,7 +59,6 @@ public class FogPool : MonoBehaviour
 
         if (_fogPool == null)
         {
-            Debug.Log("fog == null");
             _fogPool = new Fog[count];
 
             for (int i = 0; i < count; i++)

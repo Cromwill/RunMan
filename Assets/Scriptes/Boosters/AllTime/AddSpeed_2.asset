@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _boosterType: 0
   _changingValue: 20
-  _price: 200
+  _price: 3500
   _descriptions: Add speed
   _itemName: speed++
   _currencyType: 0

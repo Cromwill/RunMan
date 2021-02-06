@@ -14,13 +14,18 @@ public class MapElementPool : MonoBehaviour
     [SerializeField] private int _tilesCount;
     [SerializeField] private int _startTilesCount;
 
+    public static MapElementPool Instance;
+
     private TileGeneration[] _tilePool;
     private ExitPanel _exitPanel;
-    private LoadGameViewer _loadViewer;
     private DebugField _debugField;
     private void Awake()
     {
-        _debugField = FindObjectOfType<DebugField>();
+        if (Instance == null)
+            Instance = this;
+        else if (Instance != this)
+            Destroy(gameObject);
+
         DontDestroyOnLoad(this.gameObject);
         Time.timeScale = 1;
         GeneratePool(_tilesCount);
@@ -54,7 +59,7 @@ public class MapElementPool : MonoBehaviour
 
     public TileGeneration GetTile()
     {
-        if(_debugField == null)
+        if (_debugField == null)
         {
             _debugField = FindObjectOfType<DebugField>();
         }
@@ -83,7 +88,7 @@ public class MapElementPool : MonoBehaviour
         {
             return _tilePool.Where(a => a.GetPosition() == position).First();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Debug.LogError(ex.Message);
             Debug.LogError(ex.StackTrace);
@@ -120,8 +125,8 @@ public class MapElementPool : MonoBehaviour
     private void GeneratePool(int count)
     {
         var tiles = FindObjectsOfType<TileGeneration>();
-        
-        if(tiles.Length > 0)
+
+        if (tiles.Length > 0)
         {
             _tilePool = tiles;
         }
@@ -144,7 +149,7 @@ public class MapElementPool : MonoBehaviour
 
     private IEnumerator GenerateTileByStep(Vector3 position)
     {
-        for(int i = 0; i < _tilesCount; i++)
+        for (int i = 0; i < _tilesCount; i++)
         {
             _tilePool[i] = Instantiate(_tiles[Random.Range(0, _tiles.Count)]);
             _tilePool[i].SetPosition(new Vector3(position.x, position.y - i, position.z));

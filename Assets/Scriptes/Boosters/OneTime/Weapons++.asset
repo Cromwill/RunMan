@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _boosterType: 1
   _changingValue: 1
-  _price: 75
+  _price: 150
   _descriptions: add damage
   _itemName: Weapons++
   _currencyType: 0

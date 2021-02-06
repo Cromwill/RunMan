@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerMover : MonoBehaviour, IPlayerComponent
 {
@@ -46,7 +47,7 @@ public class PlayerMover : MonoBehaviour, IPlayerComponent
         _selfRigidbody.velocity = transform.forward.normalized * _speed * Time.fixedDeltaTime;
     }
 
-    public void Initialization(params Booster[] boosters)
+    public void Initialization(Action<string> action, params Booster[] boosters)
     {
         if (boosters != null)
         {

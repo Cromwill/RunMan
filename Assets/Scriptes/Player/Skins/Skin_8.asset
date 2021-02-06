@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skin_8
   m_EditorClassIdentifier: 
   _id: 8
-  _price: 1250
+  _price: 2000
   _type: avatar
   _backPack: {fileID: 0}
   _feet: {fileID: 4267594417667142203, guid: 16f8ff395c3c3d646b5b17cd949c872d, type: 3}

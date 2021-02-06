@@ -598,6 +598,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 432206810, guid: f2336d9c3dc3cda448e72f4fba1dbba0, type: 3}
+      propertyPath: _damageEffect
+      value: 
+      objectReference: {fileID: 169474514}
     - target: {fileID: 525852093, guid: f2336d9c3dc3cda448e72f4fba1dbba0, type: 3}
       propertyPath: _armorViewer
       value: 
@@ -622,6 +626,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1096082049}
+    - target: {fileID: 5457444585940624704, guid: f2336d9c3dc3cda448e72f4fba1dbba0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5457444585940624704, guid: f2336d9c3dc3cda448e72f4fba1dbba0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5457444585940624704, guid: f2336d9c3dc3cda448e72f4fba1dbba0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5523460105936681833, guid: f2336d9c3dc3cda448e72f4fba1dbba0,
         type: 3}
       propertyPath: m_IsTrigger
@@ -716,6 +735,12 @@ PrefabInstance:
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2336d9c3dc3cda448e72f4fba1dbba0, type: 3}
+--- !u!198 &169474514 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5291562954987317816, guid: f2336d9c3dc3cda448e72f4fba1dbba0,
+    type: 3}
+  m_PrefabInstance: {fileID: 169474513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &255029858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,7 +1953,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-744346
+  m_Name: pb_Mesh-225348
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public class ScoreCounter : MonoBehaviour, IPlayerComponent
 {
@@ -15,7 +16,7 @@ public class ScoreCounter : MonoBehaviour, IPlayerComponent
     public int money => _scoreTerms.ScoreToMoney(score);
     public BoosterType BoosterType => _type;
 
-    public void Initialization(params Booster[] boosters)
+    public void Initialization(Action<string> action, params Booster[] boosters)
     {
         _oldPosition = PositionColculation(transform.position);
 

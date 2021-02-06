@@ -2121,6 +2121,7 @@ MonoBehaviour:
   _minTurnSpeed: 0.7
   _defualtLife: 1
   _reactionTime: 3
+  _damage: 1
   _achievements:
   - {fileID: 11400000, guid: d999a5798cf7cbd43b0b60c486307a3a, type: 2}
 --- !u!1 &7727318087065605386
